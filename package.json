@@ -1,0 +1,69 @@
+{
+  "name": "naive-create-form",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "lib-build": "vite build -c vite.config.lib.ts",
+    "serve": "vite preview",
+    "lint": "eslint .",
+    "check": "npx taze -w",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@types/uuid": "^8.3.4",
+    "@vicons/antd": "^0.11.0",
+    "highlight.js": "^11.6.0",
+    "naive-ui": "^2.31.0",
+    "uuid": "^8.3.2",
+    "vue": "^3.2.37",
+    "vue3-i18n-plugin": "^1.0.9",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.25.2",
+    "@types/node": "^18.6.1",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "eslint": "^8.20.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.2",
+    "vite-plugin-dts": "^1.4.0",
+    "vitepress": "^1.0.0-draft.8",
+    "vue-tsc": "^0.3.0"
+  },
+  "peerDependencies": {
+    "naive-ui": "^2.31.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "prettier --parser=vue --write",
+      "eslint --fix"
+    ],
+    "*.tsx": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "license": "MIT",
+  "files": [
+    "es",
+    "README.md"
+  ],
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "engines": {
+    "node": ">=14"
+  }
+}
