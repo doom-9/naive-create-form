@@ -10,6 +10,7 @@ createApp(App)
   .use(naive)
   .use(i18n, {
     initial: 'zh',
+
     translationConfiguration: i18nConfig,
   })
   .mount('#app')
