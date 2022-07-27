@@ -15,6 +15,7 @@ import type {
   CheckboxGroupProps,
   FormInst,
   FormProps,
+  ModalProps,
   RadioGroupProps,
 } from 'naive-ui'
 import {
@@ -29,6 +30,7 @@ import {
   NIcon,
   NInput,
   NInputNumber,
+  NModal,
   NRadio,
   NRadioGroup,
   NRate,
@@ -47,27 +49,32 @@ import request from '../../utils/request'
 import type { ProFormItem, requestConfig } from './types/props'
 
 const ProFormProps = {
-  formProps: Object as PropType<Omit<FormProps, 'model'>>,
-  formItems: {
+  'modal': Boolean,
+  'modalShow': Boolean,
+  'modalProps': Object as PropType<Omit<ModalProps, 'show'>>,
+  'formProps': Object as PropType<Omit<FormProps, 'model' | 'preset'>>,
+  'formItems': {
     type: Array as PropType<ProFormItem[]>,
     default: [],
   },
-  resetButton: Boolean,
-  validateButton: Boolean,
-  submitButton: {
+  'resetButton': Boolean,
+  'validateButton': Boolean,
+  'submitButton': {
     type: Boolean,
     default: true,
   },
-  title: String,
-  isKeyPressSubmit: Boolean,
-  initialValues: Object as PropType<Record<string, any>>,
-  values: Object as PropType<Record<string, any>>,
-  onReset: Function as PropType<() => void>,
-  onFinish: Function as PropType<(res: Record<string, any>) => void>,
-  onError: Function as PropType<FormValidateCallback>,
-  onValidate: Function as PropType<(value: Record<string, any>) => void>,
-  onValuesChange: Function as PropType<(key: string, value: any) => void>,
-  requestConfig: Object as PropType<requestConfig>,
+  'title': String,
+  'isKeyPressSubmit': Boolean,
+  'initialValues': Object as PropType<Record<string, any>>,
+  'values': Object as PropType<Record<string, any>>,
+  'onReset': Function as PropType<() => void>,
+  'onFinish': Function as PropType<(res: Record<string, any>) => void>,
+  'onError': Function as PropType<FormValidateCallback>,
+  'onValidate': Function as PropType<(value: Record<string, any>) => void>,
+  'onValuesChange': Function as PropType<(key: string, value: any) => void>,
+  'onModalShowChange': Function as PropType<(value: boolean) => void>,
+  'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
+  'requestConfig': Object as PropType<requestConfig>,
 }
 
 export default defineComponent({
@@ -398,37 +405,9 @@ export default defineComponent({
       })
     })
 
-    return {
-      modalData,
-      formRef,
-      handleValidateClick,
-      handleInputUpdateValue,
-      handleRadioUpdateChecked,
-      handleResetClick,
-      handleSubmitClick,
-      Vnode,
-    }
-  },
-  render() {
-    const {
-      formProps,
-      modalData,
-      handleValidateClick,
-      handleResetClick,
-      handleSubmitClick,
-      resetButton,
-      validateButton,
-      submitButton,
-      title,
-      Vnode,
-    } = this
-
-    return (
-      <Fragment>
-        {title ? <NDivider>{title}</NDivider> : null}
-        <NForm {...formProps} model={modalData} ref="formRef">
-          {Vnode}
-        </NForm>
+    const BtnsVnode: ComputedRef<JSX.Element> = computed(() => {
+      const { resetButton, validateButton, submitButton } = props
+      return (
         <NSpace justify="center">
           {validateButton === true
             ? (
@@ -452,7 +431,66 @@ export default defineComponent({
               )
             : null}
         </NSpace>
+      )
+    })
+
+    const handleModalShowChange = (value: boolean) => {
+      props.onModalShowChange && props.onModalShowChange(value)
+      props['onUpdate:modalShow'] && props['onUpdate:modalShow'](value)
+    }
+
+    return {
+      modalData,
+      formRef,
+      handleValidateClick,
+      handleInputUpdateValue,
+      handleRadioUpdateChecked,
+      handleResetClick,
+      handleSubmitClick,
+      handleModalShowChange,
+      Vnode,
+      BtnsVnode,
+    }
+  },
+  render() {
+    const {
+      formProps,
+      modalData,
+      title,
+      Vnode,
+      BtnsVnode,
+      modal,
+      modalShow,
+      modalProps,
+      handleModalShowChange,
+    } = this
+
+    return modal
+      ? (
+      <NModal
+        show={modalShow}
+        preset="card"
+        style={{
+          width: '50%',
+        }}
+        {...modalProps}
+        onUpdateShow={handleModalShowChange}
+      >
+        {title ? <NDivider>{title}</NDivider> : null}
+        <NForm {...formProps} model={modalData} ref="formRef">
+          {Vnode}
+        </NForm>
+        {BtnsVnode}
+      </NModal>
+        )
+      : (
+      <Fragment>
+        {title ? <NDivider>{title}</NDivider> : null}
+        <NForm {...formProps} model={modalData} ref="formRef">
+          {Vnode}
+        </NForm>
+        {BtnsVnode}
       </Fragment>
-    )
+        )
   },
 })

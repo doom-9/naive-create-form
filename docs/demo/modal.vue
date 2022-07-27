@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue'
+import { NButton } from 'naive-ui'
 import proForm from '../../lib/components/proForm/index'
 
 const formItems = [
@@ -146,10 +148,16 @@ const onValuesChange = (key, value) => {
   // eslint-disable-next-line no-console
   console.log(key, value)
 }
+
+const showModal = ref(false)
 </script>
 
 <template>
+  <n-button @click="showModal = !showModal">
+    {{ showModal ? "关闭" : "打开" }}
+  </n-button>
   <proForm
+    v-model:modalShow="showModal"
     :form-items="formItems"
     :form-props="formProps"
     title="个人信息录入"
@@ -157,5 +165,6 @@ const onValuesChange = (key, value) => {
     is-key-press-submit
     :initial-values="initialValues"
     :on-values-change="onValuesChange"
+    :modal="true"
   />
 </template>
