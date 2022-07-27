@@ -43,7 +43,8 @@ import {
 import type { FormValidateCallback } from 'naive-ui/es/form/src/interface'
 import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 import QuestionCircle48Regular from '../../icon/QuestionCircle48Regular.vue'
-import type { ProFormItem } from './types/props'
+import request from '../../utils/request'
+import type { ProFormItem, requestConfig } from './types/props'
 
 const ProFormProps = {
   formProps: Object as PropType<Omit<FormProps, 'model'>>,
@@ -62,10 +63,11 @@ const ProFormProps = {
   initialValues: Object as PropType<Record<string, any>>,
   values: Object as PropType<Record<string, any>>,
   onReset: Function as PropType<() => void>,
-  onFinish: Function as PropType<() => void>,
+  onFinish: Function as PropType<(res: Record<string, any>) => void>,
   onError: Function as PropType<FormValidateCallback>,
   onValidate: Function as PropType<(value: Record<string, any>) => void>,
   onValuesChange: Function as PropType<(key: string, value: any) => void>,
+  requestConfig: Object as PropType<requestConfig>,
 }
 
 export default defineComponent({
@@ -111,10 +113,22 @@ export default defineComponent({
     }
 
     const handleSubmitClick = () => {
-      formRef.value?.validate((errors) => {
-        if (!errors)
-          props?.onFinish && props.onFinish()
-        else props?.onError && props.onError(errors)
+      formRef.value?.validate(async (errors) => {
+        if (!errors) {
+          const requestConfig = props.requestConfig
+          if (requestConfig === undefined)
+            return
+          const res = await request(
+            requestConfig.methods,
+            requestConfig.url,
+            modalData,
+            requestConfig.headers,
+          )
+          props?.onFinish && props.onFinish(res)
+        }
+        else {
+          props?.onError && props.onError(errors)
+        }
       })
     }
 

@@ -16,6 +16,7 @@ import type {
   TimePickerProps,
   UploadProps,
 } from 'naive-ui'
+import type { reqType } from '../../../utils/request'
 
 type addCommonProps<T extends Record<string, any>> = T & {
   formItemProps?: Omit<FormItemProps, 'label' | 'path'>
@@ -109,3 +110,9 @@ export type ProFormItem =
   }
 
 export type ProFormItemType = 'input' | 'radio'
+
+export interface requestConfig {
+  methods?: reqType
+  url: string
+  headers?: Record<string, string>
+}
