@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-import { NButton } from 'naive-ui'
 import proForm from '../../lib/components/proForm/index'
 
 const formItems = [
@@ -63,10 +61,6 @@ const formItems = [
     type: 'timePicker',
     label: '早上几点起床',
     key: 'getup',
-    tooltipConfig: {
-      show: true,
-      text: '时分秒',
-    },
   },
   {
     type: 'datePicker',
@@ -128,18 +122,20 @@ const formProps = {
   },
 }
 
-const showModal = ref(false)
+const initialValues = {
+  name: 'hello',
+  age: 18,
+  maritalStatus: '1',
+  like: '1',
+  rate: 3,
+}
 </script>
 
 <template>
-  <n-button @click="showModal = !showModal">
-    {{ showModal ? "关闭" : "打开" }}
-  </n-button>
   <proForm
-    v-model:modalShow="showModal"
     :form-items="formItems"
     :form-props="formProps"
     title="个人信息录入"
-    :modal="true"
+    :initial-values="initialValues"
   />
 </template>
