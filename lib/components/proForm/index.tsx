@@ -116,14 +116,19 @@ export default defineComponent({
       formRef.value?.validate(async (errors) => {
         if (!errors) {
           const requestConfig = props.requestConfig
-          if (requestConfig === undefined)
-            return
-          const res = await request(
-            requestConfig.methods,
-            requestConfig.url,
-            modalData,
-            requestConfig.headers,
-          )
+          let res: Record<string, any>
+          if (requestConfig === undefined) {
+            res = modalData
+          }
+          else {
+            res = await request(
+              requestConfig.methods,
+              requestConfig.url,
+              modalData,
+              requestConfig.headers,
+            )
+          }
+
           props?.onFinish && props.onFinish(res)
         }
         else {
