@@ -116,6 +116,12 @@ const formItems = [
     type: 'slider',
     label: '自我打分',
     key: 'slider',
+    rule: {
+      required: true,
+      message: '请自我打分',
+      trigger: ['change'],
+      type: 'number'
+    }
   },
   {
     type: 'divider',

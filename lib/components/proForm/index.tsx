@@ -369,6 +369,7 @@ export default defineComponent({
               key={item.key}
               label={item.label}
               path={item.key}
+              rule={item.rule}
             >
               {getNFormItemVnode(item)}
               {getNTooltipVnode(item)}

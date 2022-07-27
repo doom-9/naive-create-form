@@ -4,6 +4,7 @@ import type {
   ColorPickerProps,
   DatePickerProps,
   FormItemProps,
+  FormItemRule,
   InputNumberProps,
   InputProps,
   RadioGroupProps,
@@ -24,6 +25,7 @@ type addCommonProps<T extends Record<string, any>> = T & {
     show: boolean
     text: string
   }
+  rule?: FormItemRule
 }
 
 export type ProFormItem =
