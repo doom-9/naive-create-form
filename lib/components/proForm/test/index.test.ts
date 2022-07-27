@@ -1,16 +1,9 @@
-import { assert, describe, expect, it } from 'vitest'
+import { describe, test } from 'vitest'
+import { mount } from '@vue/test-utils'
+import ProForm from '../../proForm/index'
 
 describe('suite name', () => {
-  it('foo', () => {
-    expect(1 + 1).toEqual(2)
-    expect(true).to.be.true
-  })
-
-  it('bar', () => {
-    assert.equal(Math.sqrt(4), 2)
-  })
-
-  it('snapshot', () => {
-    expect({ foo: 'bar' }).toMatchSnapshot()
+  test('should work with import on demand', () => {
+    mount(ProForm)
   })
 })

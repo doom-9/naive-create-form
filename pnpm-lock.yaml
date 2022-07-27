@@ -7,6 +7,7 @@ specifiers:
   '@vicons/antd': ^0.11.0
   '@vitejs/plugin-vue': ^2.3.3
   '@vitejs/plugin-vue-jsx': ^1.3.10
+  '@vue/test-utils': ^2.0.2
   eslint: ^8.20.0
   highlight.js: ^11.6.0
   husky: ^7.0.4
@@ -40,6 +41,7 @@ devDependencies:
   '@types/node': 18.6.1
   '@vitejs/plugin-vue': 2.3.3_vite@3.0.2+vue@3.2.37
   '@vitejs/plugin-vue-jsx': 1.3.10
+  '@vue/test-utils': 2.0.2_vue@3.2.37
   eslint: 8.20.0
   husky: 7.0.4
   jsdom: 20.0.0
@@ -1291,6 +1293,14 @@ packages:
 
   /@vue/shared/3.2.37:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
+
+  /@vue/test-utils/2.0.2_vue@3.2.37:
+    resolution: {integrity: sha512-E2P4oXSaWDqTZNbmKZFVLrNN/siVN78YkEqs7pHryWerrlZR9bBFLWdJwRoguX45Ru6HxIflzKl4vQvwRMwm5g==}
+    peerDependencies:
+      vue: ^3.0.1
+    dependencies:
+      vue: 3.2.37
+    dev: true
 
   /@vueuse/core/8.9.4_vue@3.2.33:
     resolution: {integrity: sha512-B/Mdj9TK1peFyWaPof+Zf/mP9XuGAngaJZBwPaXBvU3aCTZlx3ltlrFFFyMV4iGBwsjSCeUCgZrtkEj9dS2Y3Q==}
