@@ -35,12 +35,12 @@ const selectedFormItem = computed(() => {
 
 <template>
   <n-divider title-placement="left">
-    {{ $t('preview') }}
+    {{ $t("preview") }}
   </n-divider>
   <n-empty v-if="formItemArray.length === 0" :description="$t('addFormItem')">
     <template #extra>
       <n-button @click="handleAddClick">
-        {{ $t('add') }}
+        {{ $t("add") }}
       </n-button>
     </template>
   </n-empty>
@@ -72,19 +72,29 @@ const selectedFormItem = computed(() => {
         >
           <div class="buttons">
             <n-space>
-              <n-button circle type="primary" size="small" @click.stop="handleCopyClick(item.id)">
+              <n-button
+                circle
+                type="primary"
+                size="small"
+                @click.stop="handleCopyClick(item.id)"
+              >
                 <n-icon size="20">
                   <CopyOutlined />
                 </n-icon>
               </n-button>
-              <n-button circle type="error" size="small" @click.stop="handleRemoveClick(item.id)">
+              <n-button
+                circle
+                type="error"
+                size="small"
+                @click.stop="handleRemoveClick(item.id)"
+              >
                 <n-icon size="20">
                   <DeleteOutlined />
                 </n-icon>
               </n-button>
             </n-space>
           </div>
-          <n-form-item :label="$t(item.formItemConfig.label)">
+          <n-form-item :label="item.formItemConfig.label">
             <n-input
               v-if="item.value === '0'"
               :clearable="item.formItemConfig.clearable"
@@ -101,7 +111,10 @@ const selectedFormItem = computed(() => {
               :step="item.formItemConfig.step"
               :show-button="item.formItemConfig.showButton"
             />
-            <n-radio-group v-else-if="item.value === '2'" :size="item.formItemConfig.size">
+            <n-radio-group
+              v-else-if="item.value === '2'"
+              :size="item.formItemConfig.size"
+            >
               <n-space>
                 <n-radio
                   v-for="item2 in item.formItemConfig.options ?? [
@@ -213,7 +226,9 @@ const selectedFormItem = computed(() => {
             >
               <n-space item-style="display: flex;">
                 <n-checkbox
-                  v-for="item2 in item.formItemConfig.options ?? [{ label: 'demo', value: 'demo' }]"
+                  v-for="item2 in item.formItemConfig.options ?? [
+                    { label: 'demo', value: 'demo' },
+                  ]"
                   :key="item2.value"
                   :value="item2.value"
                   :label="item2.label"

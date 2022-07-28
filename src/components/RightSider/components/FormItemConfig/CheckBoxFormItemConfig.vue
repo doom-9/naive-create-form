@@ -5,7 +5,7 @@ import { ruleOptions } from '../../../../const/const'
 
 const formValue = useConfig<{
   label: string | undefined
-  name: string | undefined
+  key: string | undefined
   max: number | undefined
   min: number | undefined
   options: Array<{
@@ -31,13 +31,17 @@ const handleSubmit = () => {
 <template>
   <n-form>
     <n-form-item :label="$t('id')">
-      <n-input v-model:value="formValue.name" type="text" />
+      <n-input v-model:value="formValue.key" type="text" />
     </n-form-item>
     <n-form-item :label="$t('name')">
       <n-input v-model:value="formValue.label" type="text" />
     </n-form-item>
     <n-form-item :label="$t('rules')">
-      <n-select v-model:value="formValue.rules" multiple :options="ruleOptions" />
+      <n-select
+        v-model:value="formValue.rules"
+        multiple
+        :options="ruleOptions"
+      />
     </n-form-item>
     <n-form-item :label="$t('maxSelect')">
       <n-input-number v-model:value="formValue.max" />
@@ -74,7 +78,7 @@ const handleSubmit = () => {
       </n-dynamic-input>
     </n-form-item>
     <n-button type="primary" @click="handleSubmit">
-      {{ $t('apply') }}
+      {{ $t("apply") }}
     </n-button>
   </n-form>
 </template>

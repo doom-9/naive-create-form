@@ -8,22 +8,26 @@ const formValue = useConfig({})
 <template>
   <n-form>
     <n-form-item :label="$t('id')">
-      <n-input v-model:value="formValue.name" type="text" />
+      <n-input v-model:value="formValue.key" type="text" />
     </n-form-item>
     <n-form-item :label="$t('name')">
       <n-input v-model:value="formValue.label" type="text" />
     </n-form-item>
     <n-form-item :label="$t('rules')">
-      <n-select v-model:value="formValue.rules" multiple :options="ruleOptions" />
+      <n-select
+        v-model:value="formValue.rules"
+        multiple
+        :options="ruleOptions"
+      />
     </n-form-item>
     <n-form-item :label="$t('range')">
       <n-radio-group v-model:value="formValue.range">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -32,10 +36,10 @@ const formValue = useConfig({})
       <n-radio-group v-model:value="formValue.reverse">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -44,10 +48,10 @@ const formValue = useConfig({})
       <n-radio-group v-model:value="formValue.vertical">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -56,10 +60,10 @@ const formValue = useConfig({})
       <n-radio-group v-model:value="formValue.tooltip">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>

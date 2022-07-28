@@ -5,7 +5,7 @@ import { ruleOptions } from '../../../../const/const'
 
 const formValue = useConfig<{
   label: string | undefined
-  name: string | undefined
+  key: string | undefined
   accept: string | undefined
   action: string | undefined
   defaultUpload: boolean
@@ -48,13 +48,17 @@ const handleSubmit = () => {
 <template>
   <n-form>
     <n-form-item :label="$t('id')">
-      <n-input v-model:value="formValue.name" type="text" />
+      <n-input v-model:value="formValue.key" type="text" />
     </n-form-item>
     <n-form-item :label="$t('name')">
       <n-input v-model:value="formValue.label" type="text" />
     </n-form-item>
     <n-form-item :label="$t('rules')">
-      <n-select v-model:value="formValue.rules" multiple :options="ruleOptions" />
+      <n-select
+        v-model:value="formValue.rules"
+        multiple
+        :options="ruleOptions"
+      />
     </n-form-item>
     <n-form-item :label="$t('accept')">
       <n-input v-model:value="formValue.accept" type="text" />
@@ -122,10 +126,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.defaultUpload">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -155,10 +159,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.multiple">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -170,10 +174,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.withCredentials">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -182,10 +186,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.showCancelButton">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -194,10 +198,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.showDownloadButton">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -206,10 +210,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.showRemoveButton">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -218,10 +222,10 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.showRetryButton">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
@@ -230,16 +234,16 @@ const handleSubmit = () => {
       <n-radio-group v-model:value="formValue.showFileList">
         <n-space>
           <n-radio :key="0" :value="true">
-            {{ $t('yes') }}
+            {{ $t("yes") }}
           </n-radio>
           <n-radio :key="1" :value="false">
-            {{ $t('no') }}
+            {{ $t("no") }}
           </n-radio>
         </n-space>
       </n-radio-group>
     </n-form-item>
     <n-button type="primary" @click="handleSubmit">
-      {{ $t('apply') }}
+      {{ $t("apply") }}
     </n-button>
   </n-form>
 </template>

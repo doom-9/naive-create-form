@@ -12,7 +12,7 @@ export const options: selectItem = [
     value: '0',
     formItemConfig: {
       label: 'input',
-      name: undefined,
+      key: undefined,
       rules: [],
       clearable: false,
       maxlength: undefined,
@@ -25,7 +25,7 @@ export const options: selectItem = [
     value: '1',
     formItemConfig: {
       label: 'inputNumber',
-      name: undefined,
+      key: undefined,
       rules: [],
       clearable: false,
       max: undefined,
@@ -40,7 +40,7 @@ export const options: selectItem = [
     value: '2',
     formItemConfig: {
       label: 'radio',
-      name: undefined,
+      key: undefined,
       rules: [],
       size: 'medium',
       options: [],
@@ -50,7 +50,7 @@ export const options: selectItem = [
     value: '3',
     formItemConfig: {
       label: 'rate',
-      name: undefined,
+      key: undefined,
       rules: [],
       size: 'medium',
       count: 5,
@@ -61,7 +61,7 @@ export const options: selectItem = [
     value: '4',
     formItemConfig: {
       label: 'select',
-      name: undefined,
+      key: undefined,
       rules: [],
       size: 'medium',
       multiple: false,
@@ -74,7 +74,7 @@ export const options: selectItem = [
     value: '5',
     formItemConfig: {
       label: 'slider',
-      name: undefined,
+      key: undefined,
       rules: [],
       max: 100,
       min: 0,
@@ -89,7 +89,7 @@ export const options: selectItem = [
     value: '6',
     formItemConfig: {
       label: 'switch',
-      name: undefined,
+      key: undefined,
       rules: [],
       round: true,
       size: 'medium',
@@ -99,7 +99,7 @@ export const options: selectItem = [
     value: '7',
     formItemConfig: {
       label: 'timePicker',
-      name: undefined,
+      key: undefined,
       rules: [],
       actions: [],
       clearable: false,
@@ -113,7 +113,7 @@ export const options: selectItem = [
     value: '12',
     formItemConfig: {
       label: 'datePicker',
-      name: undefined,
+      key: undefined,
       rules: [],
       actions: [],
       clearable: false,
@@ -130,7 +130,7 @@ export const options: selectItem = [
     value: '8',
     formItemConfig: {
       label: 'treeSelect',
-      name: undefined,
+      key: undefined,
       rules: [],
       size: 'medium',
       clearable: false,
@@ -140,7 +140,7 @@ export const options: selectItem = [
     value: '9',
     formItemConfig: {
       label: 'upload',
-      name: undefined,
+      key: undefined,
       rules: [],
       accept: undefined,
       action: undefined,
@@ -164,7 +164,7 @@ export const options: selectItem = [
     value: '10',
     formItemConfig: {
       label: 'colorPicker',
-      name: undefined,
+      key: undefined,
       rules: [],
       size: 'medium',
       modes: [],
@@ -176,7 +176,7 @@ export const options: selectItem = [
     value: '11',
     formItemConfig: {
       label: 'checkbox',
-      name: undefined,
+      key: undefined,
       rules: [],
       max: undefined,
       min: undefined,
@@ -190,7 +190,6 @@ export const LayoutOptions: selectItem = [
     value: '13',
     formItemConfig: {
       label: 'divider',
-      name: 'divider',
       dashed: false,
       vertical: false,
       titlePlacement: 'center',
