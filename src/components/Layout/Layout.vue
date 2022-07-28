@@ -37,7 +37,7 @@ const handleGenerateCodeSet = () => {
 }
 
 const handleGenerateConfig = () => {
-  modalCode.value = generateConfig(store.state.formItemArray)
+  modalCode.value = generateConfig()
   showModal.value = true
 }
 </script>

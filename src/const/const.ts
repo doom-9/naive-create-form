@@ -243,3 +243,95 @@ export const ruleOptions: Array<{
     value: '2',
   },
 ]
+
+// 0---string 1---booleanOrNumber 3---value
+export const componentPropsConfig = {
+  0: {
+    clearable: 1,
+    maxlength: 1,
+    minlength: 1,
+    type: 0,
+    size: 0,
+  },
+  1: {
+    clearable: 1,
+    max: 1,
+    min: 1,
+    type: 0,
+    size: 0,
+    step: 1,
+    showButton: 1,
+  },
+  2: {
+    size: 0,
+  },
+  3: {
+    size: 0,
+    count: 1,
+    allowHalf: 1,
+  },
+  4: {
+    size: 0,
+    multiple: 1,
+    placeholder: 0,
+    clearable: 1,
+  },
+  5: {
+    max: 1,
+    min: 1,
+    step: 1,
+    range: 1,
+    reverse: 1,
+    vertical: 1,
+    tooltip: 1,
+  },
+  6: {
+    round: 1,
+    size: 0,
+  },
+  7: {
+    clearable: 1,
+    format: 0,
+    size: 0,
+    placeholder: 0,
+    use12Hours: 1,
+  },
+  8: {
+    size: 0,
+    clearable: 1,
+  },
+  9: {
+    accept: 0,
+    action: 0,
+    defaultUpload: 1,
+    listType: 0,
+    max: 1,
+    method: 0,
+    multiple: 1,
+    fileName: 0,
+    withCredentials: 1,
+    showCancelButton: 1,
+    showDownloadButton: 1,
+    showRemoveButton: 1,
+    showRetryButton: 1,
+    showFileList: 1,
+  },
+  10: {
+    size: 0,
+    showAlpha: 1,
+  },
+  11: {
+    max: 1,
+    min: 1,
+  },
+  12: {
+    clearable: 1,
+    format: 0,
+    size: 0,
+    placeholder: 0,
+    type: 0,
+    startPlaceholder: 0,
+    endPlaceholder: 0,
+    separator: 0,
+  },
+}
