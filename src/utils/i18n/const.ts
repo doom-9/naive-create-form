@@ -97,6 +97,7 @@ export default {
     modalTitle: '选项',
     copy: '复制',
     redo: '重做',
+    generateConfig: '生成配置对象',
   },
   en: {
     input: 'Input',
@@ -196,5 +197,6 @@ export default {
     modalTitle: 'Options',
     copy: 'Copy',
     redo: 'Redo',
+    generateConfig: '生成配置对象',
   },
 }

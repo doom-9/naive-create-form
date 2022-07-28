@@ -717,6 +717,12 @@ export const generateCode = (data: formItemType[]): string => {
   return Code
 }
 
+export const generateConfig = (): string => {
+  const Code = JSON.stringify(store.state.formItemArray)
+
+  return Code
+}
+
 // normal
 
 export const copy = (value: string): void => {

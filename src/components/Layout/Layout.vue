@@ -5,7 +5,7 @@ import { FolderOutlined, SettingOutlined } from '@vicons/antd'
 import LeftSider from '../LeftSider/Sider.vue'
 import RightSider from '../RightSider/Sider.vue'
 import Content from '../Content/Content.vue'
-import { copy, generateCode } from '../../utils'
+import { copy, generateCode, generateConfig } from '../../utils'
 import type { State } from '../../store'
 import SetGenerateCodeModal from './components/SetGenerateCodeModal/SetGenerateCodeModal.vue'
 
@@ -35,6 +35,11 @@ const handleGenerateCodeSet = () => {
   if (SetGenerateCodeModalRef.value)
     SetGenerateCodeModalRef.value.handleShowModal()
 }
+
+const handleGenerateConfig = () => {
+  modalCode.value = generateConfig(store.state.formItemArray)
+  showModal.value = true
+}
 </script>
 
 <template>
@@ -62,22 +67,42 @@ const handleGenerateCodeSet = () => {
             size="medium"
             @click="handleGenerateCodeSet"
           >
-            {{ $t('generateCodeSettings') }}
+            {{ $t("generateCodeSettings") }}
             <n-icon size="20">
               <SettingOutlined />
             </n-icon>
           </n-button>
-          <n-button type="primary" strong secondary round size="medium" @click="handleGenerateCode">
-            {{ $t('generateComponentCode') }}
+          <n-button
+            type="primary"
+            strong
+            secondary
+            round
+            size="medium"
+            @click="handleGenerateCode"
+          >
+            {{ $t("generateComponentCode") }}
+            <n-icon size="20">
+              <FolderOutlined />
+            </n-icon>
+          </n-button>
+          <n-button
+            type="primary"
+            strong
+            secondary
+            round
+            size="medium"
+            @click="handleGenerateConfig"
+          >
+            {{ $t("generateConfig") }}
             <n-icon size="20">
               <FolderOutlined />
             </n-icon>
           </n-button>
           <n-button strong quaternary round @click="$emit('changeTheme')">
-            {{ $props.isDark ? $t('light') : $t('dark') }}
+            {{ $props.isDark ? $t("light") : $t("dark") }}
           </n-button>
           <n-button strong quaternary round @click="$emit('changeLocale')">
-            {{ $props.isEnglish ? '中文' : 'English' }}
+            {{ $props.isEnglish ? "中文" : "English" }}
           </n-button>
           <n-button strong quaternary round @click="handleOpenGithub">
             Github
@@ -99,8 +124,12 @@ const handleGenerateCodeSet = () => {
           <RightSider />
         </n-layout-sider>
       </n-layout>
-      <n-layout-footer bordered position="absolute" style="height: 64px; padding: 24px">
-        {{ $t('tip') }}
+      <n-layout-footer
+        bordered
+        position="absolute"
+        style="height: 64px; padding: 24px"
+      >
+        {{ $t("tip") }}
       </n-layout-footer>
     </n-layout>
     <n-modal
