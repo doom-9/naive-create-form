@@ -253,7 +253,7 @@ const selectedFormItem = computed(() => {
               :vertical="item.formItemConfig.vertical"
               :title-placement="item.formItemConfig.titlePlacement"
             >
-              {{ item.formItemConfig.name }}
+              {{ item.formItemConfig.label }}
             </n-divider>
           </n-form-item>
         </n-card>
