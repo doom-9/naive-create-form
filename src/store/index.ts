@@ -2,8 +2,24 @@ import { createStore } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
 import { getItemConfig, initialFormState } from '../const/const'
 
+export type ValueType =
+  | '0'
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
+  | '11'
+  | '12'
+  | '13'
+
 export interface formItemType {
-  value: string
+  value: ValueType
   id: string
   formItemConfig: {
     [key: string]: any
@@ -47,7 +63,10 @@ export const store = createStore<State>({
     }
   },
   mutations: {
-    add(state: State, payload: Omit<formItemType, 'id' | 'formItemConfig'>): void {
+    add(
+      state: State,
+      payload: Omit<formItemType, 'id' | 'formItemConfig'>,
+    ): void {
       const id = uuidv4()
       state.formItemArray.push({
         id,
@@ -56,7 +75,10 @@ export const store = createStore<State>({
       })
       window.$message.success(state.local === 'zh' ? '操作成功' : 'Success')
     },
-    addAndSelect(state: State, payload: Omit<formItemType, 'id' | 'formItemConfig'>): void {
+    addAndSelect(
+      state: State,
+      payload: Omit<formItemType, 'id' | 'formItemConfig'>,
+    ): void {
       const id = uuidv4()
       state.formItemArray.push({
         id,
@@ -77,7 +99,9 @@ export const store = createStore<State>({
       state.formItemArray = []
     },
     copy(state: State, payload: string): void {
-      const index = state.formItemArray.findIndex(item => item.id === payload)
+      const index = state.formItemArray.findIndex(
+        item => item.id === payload,
+      )
       if (index !== -1) {
         const newItem = { ...state.formItemArray[index] }
         newItem.id = uuidv4()
@@ -86,30 +110,42 @@ export const store = createStore<State>({
       window.$message.success(state.local === 'zh' ? '操作成功' : 'Success')
     },
     up(state: State, payload: string) {
-      const index = state.formItemArray.findIndex(item => item.id === payload)
+      const index = state.formItemArray.findIndex(
+        item => item.id === payload,
+      )
       if (index > 0) {
         const item = state.formItemArray[index]
         state.formItemArray.splice(index, 1)
         state.formItemArray.splice(index - 1, 0, item)
       }
       else {
-        window.$message.warning(state.local === 'zh' ? '已经是第一个了' : 'Already the first')
+        window.$message.warning(
+          state.local === 'zh' ? '已经是第一个了' : 'Already the first',
+        )
       }
     },
     down(state: State, payload: string) {
-      const index = state.formItemArray.findIndex(item => item.id === payload)
+      const index = state.formItemArray.findIndex(
+        item => item.id === payload,
+      )
       if (index < state.formItemArray.length - 1) {
         const item = state.formItemArray[index]
         state.formItemArray.splice(index, 1)
         state.formItemArray.splice(index + 1, 0, item)
       }
       else {
-        window.$message.warning(state.local === 'zh' ? '已经是最后一个了' : 'Already the last')
+        window.$message.warning(
+          state.local === 'zh' ? '已经是最后一个了' : 'Already the last',
+        )
       }
     },
     exchange(state: State, payload: { id1: string; id2: string }) {
-      const index1 = state.formItemArray.findIndex(item => item.id === payload.id1)
-      const index2 = state.formItemArray.findIndex(item => item.id === payload.id2)
+      const index1 = state.formItemArray.findIndex(
+        item => item.id === payload.id1,
+      )
+      const index2 = state.formItemArray.findIndex(
+        item => item.id === payload.id2,
+      )
       if (index1 !== -1 && index2 !== -1) {
         const item1 = state.formItemArray[index1]
         const item2 = state.formItemArray[index2]
@@ -150,12 +186,19 @@ export const store = createStore<State>({
     },
     changeSelectedFormItem(state: State, payload: string) {
       state.selectedFormItem = payload
-      const index = state.formItemArray.findIndex(item => item.id === payload)
+      const index = state.formItemArray.findIndex(
+        item => item.id === payload,
+      )
       if (index !== -1)
         state.selectedFormItemType = state.formItemArray[index].value
     },
-    changeSelectedFormItemConfig(state: State, payload: formItemType['formItemConfig']) {
-      const index = state.formItemArray.findIndex(item => item.id === state.selectedFormItem)
+    changeSelectedFormItemConfig(
+      state: State,
+      payload: formItemType['formItemConfig'],
+    ) {
+      const index = state.formItemArray.findIndex(
+        item => item.id === state.selectedFormItem,
+      )
       if (index !== -1) {
         state.formItemArray[index].formItemConfig = {
           ...state.formItemArray[index].formItemConfig,
@@ -164,7 +207,9 @@ export const store = createStore<State>({
       }
       else {
         window.$message.warning(
-          state.local === 'zh' ? '请先选择一个表单项' : 'Please select a form item',
+          state.local === 'zh'
+            ? '请先选择一个表单项'
+            : 'Please select a form item',
         )
       }
     },
@@ -183,10 +228,14 @@ export const store = createStore<State>({
       return state.formItemArray.length
     },
     formItemConfig(state) {
-      return state.formItemArray.find(item => item.id === state.selectedFormItem)?.formItemConfig
+      return state.formItemArray.find(
+        item => item.id === state.selectedFormItem,
+      )?.formItemConfig
     },
     selectedFormItem(state) {
-      const index = state.formItemArray.findIndex(item => item.id === state.selectedFormItem)
+      const index = state.formItemArray.findIndex(
+        item => item.id === state.selectedFormItem,
+      )
       if (index !== -1)
         return state.formItemArray[index]
 

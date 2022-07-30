@@ -244,9 +244,10 @@ export const ruleOptions: Array<{
   },
 ]
 
-// 0---string 1---booleanOrNumber 3---value
+// 0---string 1---booleanOrNumber 2---value
 export const componentPropsConfig = {
   0: {
+    key: 2,
     clearable: 1,
     maxlength: 1,
     minlength: 1,
@@ -254,6 +255,7 @@ export const componentPropsConfig = {
     size: 0,
   },
   1: {
+    key: 2,
     clearable: 1,
     max: 1,
     min: 1,
@@ -263,20 +265,24 @@ export const componentPropsConfig = {
     showButton: 1,
   },
   2: {
+    key: 2,
     size: 0,
   },
   3: {
+    key: 2,
     size: 0,
     count: 1,
     allowHalf: 1,
   },
   4: {
+    key: 2,
     size: 0,
     multiple: 1,
     placeholder: 0,
     clearable: 1,
   },
   5: {
+    key: 2,
     max: 1,
     min: 1,
     step: 1,
@@ -286,10 +292,12 @@ export const componentPropsConfig = {
     tooltip: 1,
   },
   6: {
+    key: 2,
     round: 1,
     size: 0,
   },
   7: {
+    key: 2,
     clearable: 1,
     format: 0,
     size: 0,
@@ -297,6 +305,7 @@ export const componentPropsConfig = {
     use12Hours: 1,
   },
   8: {
+    key: 2,
     size: 0,
     clearable: 1,
   },
@@ -317,14 +326,17 @@ export const componentPropsConfig = {
     showFileList: 1,
   },
   10: {
+    key: 2,
     size: 0,
     showAlpha: 1,
   },
   11: {
+    key: 2,
     max: 1,
     min: 1,
   },
   12: {
+    key: 2,
     clearable: 1,
     format: 0,
     size: 0,
@@ -333,5 +345,10 @@ export const componentPropsConfig = {
     startPlaceholder: 0,
     endPlaceholder: 0,
     separator: 0,
+  },
+  13: {
+    dashed: 1,
+    vertical: 1,
+    titlePlacement: 0,
   },
 }
