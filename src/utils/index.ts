@@ -114,10 +114,14 @@ const getFormItemContentConfig = (
           )
         }
         else if (type === 2) {
-          if (isUpload)
-            strArray.push(bindValueConfig(bindFileListConfig(key, item[key])))
-          else
+          if (isUpload) {
+            strArray.push(
+              bindFileListConfig(combineNameAndValue(key, item[key])),
+            )
+          }
+          else {
             strArray.push(bindValueConfig(combineNameAndValue(key, item[key])))
+          }
         }
       }
     }
