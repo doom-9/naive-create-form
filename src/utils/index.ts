@@ -84,7 +84,7 @@ const bindFileListConfig = (config: bindConfig): string => {
 
 const getFormItemConfig = (item: formItemType): string => {
   return `label="${item.formItemConfig.label as string}" path="${
-    item.formItemConfig.name as string
+    item.formItemConfig.key as string
   }"`
 }
 
@@ -239,7 +239,7 @@ const getTypeToFormItem = (item: formItemType): string => {
     case '13':
       return `
         <${PREFIX}-divider ${formItemContentConfig}>${
-        (item.formItemConfig.name as string) ?? ''
+        (item.formItemConfig.label as string) ?? ''
       }</${PREFIX}-divider>`
     case '12':
       return `
@@ -351,7 +351,7 @@ const getRulesObject = (data: formItemType[]): string => {
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i]
-    if (item.formItemConfig.name === undefined)
+    if (item.formItemConfig.key === undefined)
       continue
     const rules = data[i].formItemConfig.rules as string[]
     const itemRulesArray: string[] = []
@@ -401,7 +401,7 @@ const getRulesObject = (data: formItemType[]): string => {
       }
     }
 
-    rulesArray.push(`${item.formItemConfig.name as string}: [
+    rulesArray.push(`${item.formItemConfig.key as string}: [
       ${itemRulesArray.join('')}
     ],`)
   }
