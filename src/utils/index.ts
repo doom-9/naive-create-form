@@ -1,4 +1,9 @@
-import { PREFIX, UI_NAME, componentPropsConfig } from '../const/const'
+import {
+  PREFIX,
+  UI_NAME,
+  componentPropsConfig,
+  formPropsConfig,
+} from '../const/const'
 import type { ValueType, formItemType } from '../store'
 import { store } from '../store'
 
@@ -272,42 +277,36 @@ const getFormItemImport = (data: formItemType[]): string => {
 // formConfig
 
 const getFormConfig = (): string => {
-  const {
-    size,
-    inline,
-    labelWidth,
-    labelAlign,
-    labelPlacement,
-    showFeedback,
-    showLabel,
-    showRequireMark,
-    requireMarkPlacement,
-    model,
-  } = store.state.formConfig
+  const formConfig = store.state.formConfig
 
-  return `${bindBooleanAndNumberConfig(
-    combineNameAndValue('model', model),
-  )} ${bindStringConfig(
-    combineNameAndValue('size', size),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('inline', inline),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('label-width', labelWidth),
-  )} ${bindStringConfig(
-    combineNameAndValue('label-align', labelAlign),
-  )} ${bindStringConfig(
-    combineNameAndValue('label-placement', labelPlacement),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('show-feedback', showFeedback),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('show-label', showLabel),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('show-require-mark', showRequireMark),
-  )} ${bindBooleanAndNumberConfig(
-    combineNameAndValue('rules', 'rules'),
-  )} ${bindStringConfig(
-    combineNameAndValue('require-mark-placement', requireMarkPlacement),
-  )}`
+  const strArray = []
+
+  for (const key in formPropsConfig) {
+    if (Object.prototype.hasOwnProperty.call(formPropsConfig, key)) {
+      if (isValidKey(key, formPropsConfig)) {
+        const type = formPropsConfig[key]
+        if (type === 0) {
+          strArray.push(
+            bindStringConfig(combineNameAndValue(key, formConfig[key])),
+          )
+        }
+        else if (type === 1) {
+          strArray.push(
+            bindBooleanAndNumberConfig(
+              combineNameAndValue(key, formConfig[key]),
+            ),
+          )
+        }
+        else if (type === 2) {
+          strArray.push(
+            bindValueConfig(combineNameAndValue(key, formConfig[key])),
+          )
+        }
+      }
+    }
+  }
+
+  return strArray.join(' ')
 }
 
 // import
