@@ -352,3 +352,16 @@ export const componentPropsConfig = {
     titlePlacement: 0,
   },
 }
+
+export const formPropsConfig = {
+  size: 0,
+  inline: 1,
+  labelWidth: 1,
+  labelAlign: 0,
+  labelPlacement: 0,
+  showFeedback: 1,
+  showLabel: 1,
+  showRequireMark: 1,
+  requireMarkPlacement: 0,
+  model: 1,
+}
