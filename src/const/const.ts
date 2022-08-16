@@ -1,11 +1,204 @@
 import type { State } from '../store'
 
-type selectItem = Array<{
+type addUndefined<T> = T | undefined
+
+type sizeT = 'small' | 'medium' | 'large'
+
+interface optionT {
+  label: string
+  value: string | number
+}
+
+interface uploadOptionT {
+  key: string
   value: string
-  formItemConfig: {
-    [key: string]: any
+}
+
+type selectItem = Array<
+  | {
+    value: '0'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      clearable: boolean
+      maxlength: addUndefined<number>
+      minlength: addUndefined<number>
+      type: 'text' | 'password' | 'textarea'
+      size: sizeT
+    }
   }
-}>
+  | {
+    value: '1'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      clearable: boolean
+      max: addUndefined<number>
+      min: addUndefined<number>
+      size: sizeT
+      step: number
+      showButton: boolean
+    }
+  }
+  | {
+    value: '2'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      size: sizeT
+      options: optionT[]
+    }
+  }
+  | {
+    value: '3'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      size: sizeT | number
+      count: number
+      allowHalf: boolean
+    }
+  }
+  | {
+    value: '4'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      size: sizeT
+      multiple: boolean
+      placeholder: string
+      clearable: boolean
+      options: optionT[]
+    }
+  }
+  | {
+    value: '5'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      max: number
+      min: number
+      step: number
+      range: boolean
+      reverse: boolean
+      vertical: boolean
+      tooltip: boolean
+    }
+  }
+  | {
+    value: '6'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      round: boolean
+      size: sizeT
+    }
+  }
+  | {
+    value: '7'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      actions: ('now' | 'confirm')[]
+      clearable: boolean
+      format: string
+      size: sizeT
+      placeholder: string
+      use12Hours: boolean
+    }
+  }
+  | {
+    value: '8'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      size: sizeT
+      clearable: boolean
+    }
+  }
+  | {
+    value: '9'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      accept: addUndefined<string>
+      action: addUndefined<string>
+      defaultUpload: boolean
+      data: addUndefined<uploadOptionT[]>
+      headers: addUndefined<uploadOptionT[]>
+      listType: 'text' | 'image' | 'image-card'
+      max: addUndefined<number>
+      method: string
+      multiple: boolean
+      fileName: string
+      withCredentials: boolean
+      showCancelButton: boolean
+      showDownloadButton: boolean
+      showRemoveButton: boolean
+      showRetryButton: boolean
+      showFileList: boolean
+    }
+  }
+  | {
+    value: '10'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      size: sizeT
+      modes: Array<'rgb' | 'hex' | 'hsl' | 'hsv'>
+      showAlpha: boolean
+      actions: Array<'confirm'>
+    }
+  }
+  | {
+    value: '11'
+    formItemConfig: {
+      label: string
+      key: addUndefined<string>
+      rules: Array<any>
+      max: addUndefined<number>
+      min: addUndefined<number>
+      options: optionT[]
+    }
+  }
+  | {
+    value: '12'
+    formItemConfig: {
+      label: 'datePicker'
+      key: undefined
+      rules: []
+      actions: []
+      clearable: false
+      format: ''
+      size: 'medium'
+      placeholder: undefined
+      type: 'date'
+      startPlaceholder: undefined
+      endPlaceholder: undefined
+      separator: undefined
+    }
+  }
+  | {
+    value: '13'
+    formItemConfig: {
+      label: string
+      dashed: boolean
+      vertical: boolean
+      titlePlacement: 'left' | 'right' | 'center'
+    }
+  }
+>
 
 export const options: selectItem = [
   {
@@ -30,7 +223,6 @@ export const options: selectItem = [
       clearable: false,
       max: undefined,
       min: undefined,
-      type: 'text',
       size: 'medium',
       step: 1,
       showButton: true,
@@ -105,7 +297,7 @@ export const options: selectItem = [
       clearable: false,
       format: 'HH:mm:ss',
       size: 'medium',
-      placeholder: undefined,
+      placeholder: '请选择时间',
       use12Hours: false,
     },
   },
