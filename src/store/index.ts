@@ -1,6 +1,9 @@
 import { createStore } from 'vuex'
 import { v4 as uuidv4 } from 'uuid'
+import type { formItemT } from '../const/const'
 import { getItemConfig, initialFormState } from '../const/const'
+
+type addId<T> = T & { id: string }
 
 export type ValueType =
   | '0'
@@ -18,13 +21,7 @@ export type ValueType =
   | '12'
   | '13'
 
-export interface formItemType {
-  value: ValueType
-  id: string
-  formItemConfig: {
-    [key: string]: any
-  }
-}
+export type formItemType = addId<formItemT>
 
 export interface State {
   formItemArray: formItemType[]
@@ -68,10 +65,12 @@ export const store = createStore<State>({
       payload: Omit<formItemType, 'id' | 'formItemConfig'>,
     ): void {
       const id = uuidv4()
+      const formItemConfig = getItemConfig(payload.value)
+      if (formItemConfig === undefined)
+        return
       state.formItemArray.push({
         id,
-        formItemConfig: getItemConfig(payload.value),
-        ...payload,
+        ...formItemConfig,
       })
       window.$message.success(state.local === 'zh' ? '操作成功' : 'Success')
     },
@@ -80,10 +79,12 @@ export const store = createStore<State>({
       payload: Omit<formItemType, 'id' | 'formItemConfig'>,
     ): void {
       const id = uuidv4()
+      const formItemConfig = getItemConfig(payload.value)
+      if (formItemConfig === undefined)
+        return
       state.formItemArray.push({
         id,
-        formItemConfig: getItemConfig(payload.value),
-        ...payload,
+        ...formItemConfig,
       })
       store.commit('changeSelectedFormItem', id)
       window.$message.success(state.local === 'zh' ? '操作成功' : 'Success')

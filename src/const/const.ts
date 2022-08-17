@@ -1,4 +1,4 @@
-import type { State } from '../store'
+import type { State, ValueType } from '../store'
 
 type addUndefined<T> = T | undefined
 
@@ -14,7 +14,7 @@ interface uploadOptionT {
   value: string
 }
 
-type selectItem = Array<
+export type formItemT =
   | {
     value: '0'
     formItemConfig: {
@@ -198,9 +198,8 @@ type selectItem = Array<
       titlePlacement: 'left' | 'right' | 'center'
     }
   }
->
 
-export const options: selectItem = [
+export const options: formItemT[] = [
   {
     value: '0',
     formItemConfig: {
@@ -377,7 +376,7 @@ export const options: selectItem = [
   },
 ]
 
-export const LayoutOptions: selectItem = [
+export const LayoutOptions: formItemT[] = [
   {
     value: '13',
     formItemConfig: {
@@ -405,17 +404,11 @@ export const initialFormState: State['formConfig'] = {
 export const UI_NAME = 'naive-ui'
 export const PREFIX = 'n'
 
-export const getItemConfig = (
-  value: string,
-): {
-  [key: string]: any
-} => {
+export const getItemConfig = (value: ValueType): formItemT | undefined => {
   const mergeOptions = [...options, ...LayoutOptions]
   const config = mergeOptions.find(item => item.value === value)
   if (config !== undefined)
-    return config.formItemConfig
-
-  return {}
+    return config
 }
 
 export const ruleOptions: Array<{
