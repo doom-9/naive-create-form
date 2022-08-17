@@ -88,9 +88,10 @@ const bindFileListConfig = (config: bindConfig): string => {
 // formItemConfig
 
 const getFormItemConfig = (item: formItemType): string => {
-  return `label="${item.formItemConfig.label as string}" path="${
-    item.formItemConfig.key as string
-  }"`
+  if (item.value === '13')
+    return ''
+  else
+    return `label="${item.formItemConfig.label}" path="${item.formItemConfig.key}"`
 }
 
 const getFormItemContentConfig = (
@@ -158,21 +159,12 @@ const getTypeToFormItem = (item: formItemType): string => {
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-radio-group ${formItemContentConfig}>
           <${PREFIX}-space>
-            ${
-              item.formItemConfig.options !== undefined
-                ? (
-                    item.formItemConfig.options as Array<{
-                      label: string
-                      value: string
-                    }>
-                  )
-                    .map(
-                      (option: { value: string; label: string }) =>
-                        `<${PREFIX}-radio value="${option.value}">${option.label}</${PREFIX}-radio>`,
-                    )
-                    .join('')
-                : ''
-            }
+            ${item.formItemConfig.options
+              .map(
+                option =>
+                  `<${PREFIX}-radio value="${option.value}">${option.label}</${PREFIX}-radio>`,
+              )
+              .join('')}
           </${PREFIX}-space>
         </${PREFIX}-radio-group>
       </${PREFIX}-form-item>`
@@ -223,28 +215,19 @@ const getTypeToFormItem = (item: formItemType): string => {
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-checkbox-group ${formItemContentConfig}>
           <${PREFIX}-space item-style="display: flex;">
-            ${
-              item.formItemConfig.options !== undefined
-                ? (
-                    item.formItemConfig.options as Array<{
-                      label: string
-                      value: string
-                    }>
-                  )
-                    .map(
-                      (option: { value: string; label: string }) =>
-                        `<${PREFIX}-checkbox value="${option.value}" label="${option.label}"/>`,
-                    )
-                    .join('')
-                : ''
-            }
+            ${item.formItemConfig.options
+              .map(
+                option =>
+                  `<${PREFIX}-checkbox value="${option.value}" label="${option.label}"/>`,
+              )
+              .join('')}
           </${PREFIX}-space>
         </${PREFIX}-checkbox-group>
       </${PREFIX}-form-item>`
     case '13':
       return `
         <${PREFIX}-divider ${formItemContentConfig}>${
-        (item.formItemConfig.label as string) ?? ''
+        item.formItemConfig.label ?? ''
       }</${PREFIX}-divider>`
     case '12':
       return `
@@ -350,9 +333,9 @@ const getRulesObject = (data: formItemType[]): string => {
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i]
-    if (item.formItemConfig.key === undefined)
+    if (item.value === '13')
       continue
-    const rules = data[i].formItemConfig.rules as string[]
+    const rules = item.formItemConfig.rules
     const itemRulesArray: string[] = []
 
     for (let i = 0; i < rules.length; i++) {
@@ -360,9 +343,7 @@ const getRulesObject = (data: formItemType[]): string => {
       switch (element) {
         case '0':
           itemRulesArray.push(
-            `{ required: true, message: '请输入${
-              item.formItemConfig.label as string
-            }', trigger: 'blur' },`,
+            `{ required: true, message: '请输入${item.formItemConfig.label}', trigger: 'blur' },`,
           )
           break
         case '1':
@@ -370,14 +351,10 @@ const getRulesObject = (data: formItemType[]): string => {
             `{ validator: (rule,value)=>{
               let reg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
               if(!reg.test(value)){
-                return new Error('请输入正确的${
-                  item.formItemConfig.label as string
-                }');
+                return new Error('请输入正确的${item.formItemConfig.label}');
               }
               return true;
-            }, message: '请输入正确的${
-              item.formItemConfig.label as string
-            }', trigger: 'blur' },`,
+            }, message: '请输入正确的${item.formItemConfig.label}', trigger: 'blur' },`,
           )
           break
         case '2':
@@ -385,14 +362,10 @@ const getRulesObject = (data: formItemType[]): string => {
             `{ validator: (rule,value)=>{
               let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
               if(!reg.test(value)){
-                return new Error('请输入正确的${
-                  item.formItemConfig.label as string
-                }');
+                return new Error('请输入正确的${item.formItemConfig.label}');
               }
               return true;
-            }, message: '请输入正确的${
-              item.formItemConfig.label as string
-            }', trigger: 'blur' },`,
+            }, message: '请输入正确的${item.formItemConfig.label}', trigger: 'blur' },`,
           )
           break
         default:
@@ -400,7 +373,7 @@ const getRulesObject = (data: formItemType[]): string => {
       }
     }
 
-    rulesArray.push(`${item.formItemConfig.key as string}: [
+    rulesArray.push(`${item.formItemConfig.key}: [
       ${itemRulesArray.join('')}
     ],`)
   }
