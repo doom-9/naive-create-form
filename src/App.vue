@@ -49,8 +49,8 @@ const changeLocale = () => {
       <Layout
         :is-dark="theme === null ? false : true"
         :is-english="locale === null ? true : false"
-        @changeTheme="changeTheme"
-        @changeLocale="changeLocale"
+        @change-theme="changeTheme"
+        @change-locale="changeLocale"
       />
     </n-message-provider>
   </n-config-provider>
