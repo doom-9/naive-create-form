@@ -176,17 +176,17 @@ export type formItemT =
     value: '12'
     formItemConfig: {
       label: 'datePicker'
-      key: undefined
+      key: addUndefined<string>
       rules: []
       actions: []
       clearable: false
       format: ''
       size: 'medium'
-      placeholder: undefined
+      placeholder: addUndefined<string>
       type: 'date'
-      startPlaceholder: undefined
-      endPlaceholder: undefined
-      separator: undefined
+      startPlaceholder: addUndefined<string>
+      endPlaceholder: addUndefined<string>
+      separator: addUndefined<string>
     }
   }
   | {
@@ -204,7 +204,7 @@ export const options: formItemT[] = [
     value: '0',
     formItemConfig: {
       label: 'input',
-      key: undefined,
+      key: 'input',
       rules: [],
       clearable: false,
       maxlength: undefined,
@@ -217,7 +217,7 @@ export const options: formItemT[] = [
     value: '1',
     formItemConfig: {
       label: 'inputNumber',
-      key: undefined,
+      key: 'inputNumber',
       rules: [],
       clearable: false,
       max: undefined,
@@ -231,7 +231,7 @@ export const options: formItemT[] = [
     value: '2',
     formItemConfig: {
       label: 'radio',
-      key: undefined,
+      key: 'radio',
       rules: [],
       size: 'medium',
       options: [],
@@ -241,7 +241,7 @@ export const options: formItemT[] = [
     value: '3',
     formItemConfig: {
       label: 'rate',
-      key: undefined,
+      key: 'rate',
       rules: [],
       size: 'medium',
       count: 5,
@@ -252,7 +252,7 @@ export const options: formItemT[] = [
     value: '4',
     formItemConfig: {
       label: 'select',
-      key: undefined,
+      key: 'select',
       rules: [],
       size: 'medium',
       multiple: false,
@@ -265,7 +265,7 @@ export const options: formItemT[] = [
     value: '5',
     formItemConfig: {
       label: 'slider',
-      key: undefined,
+      key: 'slider',
       rules: [],
       max: 100,
       min: 0,
@@ -280,7 +280,7 @@ export const options: formItemT[] = [
     value: '6',
     formItemConfig: {
       label: 'switch',
-      key: undefined,
+      key: 'switch',
       rules: [],
       round: true,
       size: 'medium',
@@ -290,7 +290,7 @@ export const options: formItemT[] = [
     value: '7',
     formItemConfig: {
       label: 'timePicker',
-      key: undefined,
+      key: 'timePicker',
       rules: [],
       actions: [],
       clearable: false,
@@ -304,7 +304,7 @@ export const options: formItemT[] = [
     value: '12',
     formItemConfig: {
       label: 'datePicker',
-      key: undefined,
+      key: 'datePicker',
       rules: [],
       actions: [],
       clearable: false,
@@ -321,7 +321,7 @@ export const options: formItemT[] = [
     value: '8',
     formItemConfig: {
       label: 'treeSelect',
-      key: undefined,
+      key: 'treeSelect',
       rules: [],
       size: 'medium',
       clearable: false,
@@ -331,7 +331,7 @@ export const options: formItemT[] = [
     value: '9',
     formItemConfig: {
       label: 'upload',
-      key: undefined,
+      key: 'upload',
       rules: [],
       accept: undefined,
       action: undefined,
@@ -355,7 +355,7 @@ export const options: formItemT[] = [
     value: '10',
     formItemConfig: {
       label: 'colorPicker',
-      key: undefined,
+      key: 'colorPicker',
       rules: [],
       size: 'medium',
       modes: [],
@@ -367,7 +367,7 @@ export const options: formItemT[] = [
     value: '11',
     formItemConfig: {
       label: 'checkbox',
-      key: undefined,
+      key: 'checkbox',
       rules: [],
       max: undefined,
       min: undefined,

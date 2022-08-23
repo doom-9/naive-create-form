@@ -298,11 +298,9 @@ const getImport = (data: formItemType[]): string => {
   const prefix = PREFIX.toUpperCase()
   if (store.state.autoAddImport) {
     const importStr = `
-<script setup type="ts">
   import { ${getFormItemImport(
     data,
   )} ${prefix}Form, ${prefix}FormItem } from '${UI_NAME}';
-</script>
     `
     return importStr
   }
@@ -373,9 +371,11 @@ const getRulesObject = (data: formItemType[]): string => {
       }
     }
 
-    rulesArray.push(`${item.formItemConfig.key}: [
-      ${itemRulesArray.join('')}
-    ],`)
+    if (itemRulesArray.length > 0) {
+      rulesArray.push(`${item.formItemConfig.key}: [
+        ${itemRulesArray.join('')}
+      ],`)
+    }
   }
 
   if (rulesArray.length === 0)
