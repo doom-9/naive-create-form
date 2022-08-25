@@ -90,8 +90,18 @@ const bindFileListConfig = (config: bindConfig): string => {
 const getFormItemConfig = (item: formItemType): string => {
   if (item.value === '13')
     return ''
-  else
-    return `label="${item.formItemConfig.label}" path="${item.formItemConfig.key}"`
+  const strArray = []
+
+  if (
+    item.formItemConfig.label !== undefined
+    && item.formItemConfig.label !== null
+  )
+    strArray.push(`label="${item.formItemConfig.label}"`)
+
+  if (item.formItemConfig.key !== undefined && item.formItemConfig.key !== null)
+    strArray.push(`path="${item.formItemConfig.key}"`)
+
+  return strArray.join(' ')
 }
 
 const getFormItemContentConfig = (
