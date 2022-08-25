@@ -95,12 +95,9 @@ const getFormItemConfig = (item: formItemType): string => {
 }
 
 const getFormItemContentConfig = (
-  item: { [key: string]: any },
+  item: formItemType['formItemConfig'],
   type: ValueType,
 ): string => {
-  if (Object.keys(item).length === 0)
-    return ''
-
   const isUpload = type === '9'
 
   const propsConfig = componentPropsConfig[type]
@@ -111,6 +108,8 @@ const getFormItemContentConfig = (
     if (Object.prototype.hasOwnProperty.call(propsConfig, key)) {
       if (isValidKey(key, propsConfig)) {
         const type = propsConfig[key]
+        if (item[key] === undefined || item[key] === null)
+          continue
         if (type === 0) {
           strArray.push(bindStringConfig(combineNameAndValue(key, item[key])))
         }
@@ -268,6 +267,8 @@ const getFormConfig = (): string => {
     if (Object.prototype.hasOwnProperty.call(formPropsConfig, key)) {
       if (isValidKey(key, formPropsConfig)) {
         const type = formPropsConfig[key]
+        if (formConfig[key] === undefined || formConfig[key] === null)
+          continue
         if (type === 0) {
           strArray.push(
             bindStringConfig(combineNameAndValue(key, formConfig[key])),
@@ -388,31 +389,6 @@ const getRulesObject = (data: formItemType[]): string => {
 `
 }
 
-// entry
-
-export const generateCode = (data: formItemType[]): string => {
-  const Code = `
-  <template>
-    <${PREFIX}-form ${getFormConfig()}>
-    ${data.map(item => getTypeToFormItem(item)).join('')}
-    ${getConfirmAndCancelButton()}
-    </${PREFIX}-form>
-  </template>
-  <script setup type="ts">
-  ${getImport(data)}
-  ${getRulesObject(data)}
-  </script>
-  `
-
-  return Code
-}
-
-export const generateConfig = (): string => {
-  const Code = JSON.stringify(store.state.formItemArray)
-
-  return Code
-}
-
 // normal
 
 export const copy = (value: string): void => {
@@ -450,4 +426,29 @@ export function getParentElement(
     currElement = currElement.parentElement
   }
   return null
+}
+
+// entry
+
+export const generateCode = (data: formItemType[]): string => {
+  const Code = `
+  <template>
+    <${PREFIX}-form ${getFormConfig()}>
+    ${data.map(item => getTypeToFormItem(item)).join('')}
+    ${getConfirmAndCancelButton()}
+    </${PREFIX}-form>
+  </template>
+  <script setup type="ts">
+  ${getImport(data)}
+  ${getRulesObject(data)}
+  </script>
+  `
+
+  return Code
+}
+
+export const generateConfig = (): string => {
+  const Code = JSON.stringify(store.state.formItemArray)
+
+  return Code
 }
