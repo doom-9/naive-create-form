@@ -4,7 +4,9 @@
 import InitialValues from './demo/initialValues.vue'
 </script>
 
+<ClientOnly>
 <InitialValues />
+</ClientOnly>
 
 ## 代码
 

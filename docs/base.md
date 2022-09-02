@@ -4,7 +4,9 @@
 import Base from './demo/base.vue'
 </script>
 
+<ClientOnly>
 <Base />
+</ClientOnly>
 
 ## 代码
 
