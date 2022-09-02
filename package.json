@@ -40,7 +40,7 @@
     "vite-plugin-dts": "^1.4.1",
     "vitepress": "^1.0.0-draft.8",
     "vitest": "^0.19.1",
-    "vue-tsc": "^0.3.0"
+    "vue-tsc": "^0.40.5"
   },
   "peerDependencies": {
     "naive-ui": "^2.32.0"
