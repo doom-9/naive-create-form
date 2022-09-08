@@ -1,4 +1,4 @@
-## 基础示例
+## modal
 
 <script setup>
 import Modal from './demo/modal.vue'

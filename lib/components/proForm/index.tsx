@@ -67,6 +67,7 @@ const ProFormProps = {
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
   'modelValue': Object as PropType<Record<string, any>>,
+  'autoPlaceholder': Boolean,
   'onReset': Function as PropType<() => void>,
   'onFinish': Function as PropType<(res: Record<string, any>) => void>,
   'onError': Function as PropType<FormValidateCallback>,
@@ -384,7 +385,7 @@ export default defineComponent({
     }
 
     const Vnode: ComputedRef<JSX.Element[] | undefined> = computed(() => {
-      const { formItems } = props
+      const { formItems, autoPlaceholder } = props
       return formItems?.map((item) => {
         if (item.type === 'divider') {
           return (
@@ -399,6 +400,39 @@ export default defineComponent({
           )
         }
         else {
+          if (autoPlaceholder) {
+            let text: string
+            if (item.type === 'input' || item.type === 'inputNumber') {
+              text = `请输入${item.label}`
+
+              if (item.props) {
+                item.props.placeholder = text
+              }
+              else {
+                item.props = {
+                  placeholder: text,
+                }
+              }
+            }
+
+            if (
+              item.type === 'select'
+              || item.type === 'timePicker'
+              || item.type === 'datePicker'
+            ) {
+              text = `请选择${item.label}`
+
+              if (item.props) {
+                item.props.placeholder = text
+              }
+              else {
+                item.props = {
+                  placeholder: text,
+                }
+              }
+            }
+          }
+
           return (
             <NFormItem
               {...item.formItemProps}

@@ -1,4 +1,4 @@
-## 基础示例
+## tooltipConfig
 
 <script setup>
 import TooltipConfig from './demo/tooltipConfig.vue'

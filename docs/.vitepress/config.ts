@@ -12,6 +12,7 @@ export default {
           { text: 'initialValues示例', link: '/initialValues' },
           { text: 'modal示例', link: '/modal' },
           { text: 'tooltipConfig示例', link: '/tooltipConfig' },
+          { text: 'autoPlaceholder示例', link: '/autoPlaceholder' },
         ],
       },
     ],
