@@ -1,5 +1,8 @@
 <script setup>
+import { useMessage } from 'naive-ui'
 import proForm from '../../lib/components/proForm/index'
+
+const message = useMessage()
 
 const formItems = [
   {
@@ -143,8 +146,7 @@ const initialValues = {
 }
 
 const onValuesChange = (key, value) => {
-  // eslint-disable-next-line no-console
-  console.log(key, value)
+  message.success(`${key}--${value}`)
 }
 </script>
 

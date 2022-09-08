@@ -1,4 +1,3 @@
-/* eslint-disable react/no-string-refs */
 import type { ComputedRef, PropType } from 'vue'
 
 import {
@@ -9,6 +8,7 @@ import {
   h,
   reactive,
   ref,
+  watch,
   watchEffect,
 } from 'vue'
 import type {
@@ -75,6 +75,8 @@ const ProFormProps = {
   'onModalShowChange': Function as PropType<(value: boolean) => void>,
   'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
   'requestConfig': Object as PropType<requestConfig>,
+  'onUpdate:value': Function as PropType<(res: Record<string, any>) => void>,
+  'onUpdateValue': Function as PropType<(res: Record<string, any>) => void>,
 }
 
 export default defineComponent({
@@ -99,6 +101,11 @@ export default defineComponent({
             modalData[key] = props.values[key]
         }
       }
+    })
+
+    watch(modalData, () => {
+      props.onUpdateValue && props.onUpdateValue(modalData)
+      props['onUpdate:value'] && props['onUpdate:value'](modalData)
     })
 
     const formRef = ref<FormInst | null>(null)
@@ -383,6 +390,7 @@ export default defineComponent({
               dashed={item.dashed}
               titlePlacement={item.titlePlacement}
               vertical={item.vertical}
+              key={item.text}
             >
               {item.text}
             </NDivider>

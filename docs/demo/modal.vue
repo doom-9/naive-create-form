@@ -132,9 +132,9 @@ const showModal = ref(false)
 </script>
 
 <template>
-  <n-button @click="showModal = !showModal">
+  <NButton @click="showModal = !showModal">
     {{ showModal ? "关闭" : "打开" }}
-  </n-button>
+  </NButton>
   <proForm
     v-model:modalShow="showModal"
     :form-items="formItems"

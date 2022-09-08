@@ -46,6 +46,7 @@ export type ProFormItem =
     valueEnum: {
       label: string
       value: string | number
+      disabled: boolean
     }[]
     group?: boolean
   }>

@@ -1,6 +1,7 @@
 export default {
   title: 'naive-ui-pro-form',
   description: '适用于NaiveUI的高级表单',
+  lastUpdated: true,
   themeConfig: {
     sidebar: [
       {
