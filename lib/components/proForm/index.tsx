@@ -66,7 +66,7 @@ const ProFormProps = {
   'title': String,
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
-  'values': Object as PropType<Record<string, any>>,
+  'modelValue': Object as PropType<Record<string, any>>,
   'onReset': Function as PropType<() => void>,
   'onFinish': Function as PropType<(res: Record<string, any>) => void>,
   'onError': Function as PropType<FormValidateCallback>,
@@ -75,8 +75,10 @@ const ProFormProps = {
   'onModalShowChange': Function as PropType<(value: boolean) => void>,
   'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
   'requestConfig': Object as PropType<requestConfig>,
-  'onUpdate:value': Function as PropType<(res: Record<string, any>) => void>,
-  'onUpdateValue': Function as PropType<(res: Record<string, any>) => void>,
+  'onUpdate:modelValue': Function as PropType<
+    (res: Record<string, any>) => void
+  >,
+  'onUpdateModelValue': Function as PropType<(res: Record<string, any>) => void>,
 }
 
 export default defineComponent({
@@ -95,17 +97,17 @@ export default defineComponent({
     handleInitialValues()
 
     watchEffect(() => {
-      if (props.values !== undefined) {
-        for (const key in props.values) {
-          if (Object.prototype.hasOwnProperty.call(props.values, key))
-            modalData[key] = props.values[key]
+      if (props.modelValue !== undefined) {
+        for (const key in props.modelValue) {
+          if (Object.prototype.hasOwnProperty.call(props.modelValue, key))
+            modalData[key] = props.modelValue[key]
         }
       }
     })
 
     watch(modalData, () => {
-      props.onUpdateValue && props.onUpdateValue(modalData)
-      props['onUpdate:value'] && props['onUpdate:value'](modalData)
+      props.onUpdateModelValue && props.onUpdateModelValue(modalData)
+      props['onUpdate:modelValue'] && props['onUpdate:modelValue'](modalData)
     })
 
     const formRef = ref<FormInst | null>(null)

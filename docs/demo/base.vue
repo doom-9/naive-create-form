@@ -1,6 +1,7 @@
 <script setup>
 import { useMessage } from 'naive-ui'
-import proForm from '../../lib/components/proForm/index'
+import { ref } from 'vue'
+import ProForm from '../../lib/components/proForm/index'
 
 const message = useMessage()
 
@@ -148,10 +149,16 @@ const initialValues = {
 const onValuesChange = (key, value) => {
   message.success(`${key}--${value}`)
 }
+
+const value = ref({
+  age: 22,
+})
 </script>
 
 <template>
-  <proForm
+  {{ JSON.stringify(value) }}
+  <ProForm
+    v-model="value"
     :form-items="formItems"
     :form-props="formProps"
     title="个人信息录入"
