@@ -43,20 +43,19 @@ export type ProFormItem =
     props?:
     | Omit<RadioProps, 'label' | 'value' | 'checked' | 'onUpdateChecked'>
     | Omit<RadioGroupProps, 'onUpdateValue' | 'value'>
-    valueEnum: {
+    valueEnum?: {
       label: string
       value: string | number
-      disabled: boolean
+      disabled?: boolean
     }[]
-    group?: boolean
   }>
   | addCommonProps<{
     type: 'select'
     props?: Omit<SelectProps, 'onUpdateValue' | 'value' | 'options'>
-    valueEnum: {
+    valueEnum?: {
       label: string
       value: string | number
-      disabled: boolean
+      disabled?: boolean
     }[]
   }>
   | addCommonProps<{
@@ -87,10 +86,10 @@ export type ProFormItem =
             'onUpdateChecked' | 'value' | 'label' | 'disabled'
           >
     | Omit<CheckboxGroupProps, 'onUpdateValue' | 'value'>
-    valueEnum: {
+    valueEnum?: {
       label: string
       value: string | number
-      disabled: boolean
+      disabled?: boolean
     }[]
   }>
   | addCommonProps<{

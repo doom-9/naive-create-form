@@ -229,33 +229,38 @@ export default defineComponent({
           )
 
         case 'radio':
-          return item.valueEnum.length > 1
-            ? (
-            <NRadioGroup
-              {...(item.props as RadioGroupProps)}
-              value={modalData[item.key]}
-              onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
-              }}
-            >
-              {item.valueEnum.map(valueItem => (
-                <NRadio {...valueItem} key={valueItem.value} />
-              ))}
-            </NRadioGroup>
-              )
-            : (
-                item.valueEnum.map(valueItem => (
-              <NRadio
-                {...item.props}
-                {...valueItem}
-                key={valueItem.value}
-                checked={valueItem.value === modalData[item.key]}
-                onUpdateChecked={(value) => {
-                  handleRadioUpdateChecked(value, item.key, valueItem.value)
+          if (item.valueEnum) {
+            return item.valueEnum.length > 1
+              ? (
+              <NRadioGroup
+                {...(item.props as RadioGroupProps)}
+                value={modalData[item.key]}
+                onUpdateValue={(value) => {
+                  handleInputUpdateValue(value, item.key)
                 }}
-              />
-                ))
-              )
+              >
+                {item.valueEnum.map(valueItem => (
+                  <NRadio {...valueItem} key={valueItem.value} />
+                ))}
+              </NRadioGroup>
+                )
+              : (
+                  item.valueEnum.map(valueItem => (
+                <NRadio
+                  {...item.props}
+                  {...valueItem}
+                  key={valueItem.value}
+                  checked={valueItem.value === modalData[item.key]}
+                  onUpdateChecked={(value) => {
+                    handleRadioUpdateChecked(value, item.key, valueItem.value)
+                  }}
+                />
+                  ))
+                )
+          }
+          else {
+            return []
+          }
 
         case 'select':
           return (
@@ -325,36 +330,41 @@ export default defineComponent({
           )
 
         case 'checkbox':
-          return item.valueEnum.length > 1
-            ? (
-            <NCheckboxGroup
-              {...(item.props as Omit<
-                CheckboxGroupProps,
-                'onUpdateValue' | 'value'
-              >)}
-              onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
-              }}
-              value={modalData[item.key]}
-            >
-              {item.valueEnum.map(valueItem => (
-                <NCheckbox key={valueItem.value} {...valueItem} />
-              ))}
-            </NCheckboxGroup>
-              )
-            : (
-                item.valueEnum.map(valueItem => (
-              <NCheckbox
-                {...item.props}
-                key={valueItem.value}
-                {...valueItem}
-                onUpdateChecked={(value) => {
+          if (item.valueEnum) {
+            return item.valueEnum.length > 1
+              ? (
+              <NCheckboxGroup
+                {...(item.props as Omit<
+                  CheckboxGroupProps,
+                  'onUpdateValue' | 'value'
+                >)}
+                onUpdateValue={(value) => {
                   handleInputUpdateValue(value, item.key)
                 }}
                 value={modalData[item.key]}
-              />
-                ))
-              )
+              >
+                {item.valueEnum.map(valueItem => (
+                  <NCheckbox key={valueItem.value} {...valueItem} />
+                ))}
+              </NCheckboxGroup>
+                )
+              : (
+                  item.valueEnum.map(valueItem => (
+                <NCheckbox
+                  {...item.props}
+                  key={valueItem.value}
+                  {...valueItem}
+                  onUpdateChecked={(value) => {
+                    handleInputUpdateValue(value, item.key)
+                  }}
+                  value={modalData[item.key]}
+                />
+                  ))
+                )
+          }
+          else {
+            return []
+          }
 
         case 'upload':
           return (

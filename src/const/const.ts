@@ -1,4 +1,4 @@
-import type { State, ValueType } from '../store'
+import type { State } from '../store'
 
 type addUndefined<T> = T | undefined
 
@@ -16,10 +16,10 @@ interface uploadOptionT {
 
 export type formItemT =
   | {
-    value: '0'
+    value: 'input'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       clearable: boolean
       maxlength: addUndefined<number>
@@ -29,10 +29,10 @@ export type formItemT =
     }
   }
   | {
-    value: '1'
+    value: 'inputNumber'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       clearable: boolean
       max: addUndefined<number>
@@ -43,20 +43,20 @@ export type formItemT =
     }
   }
   | {
-    value: '2'
+    value: 'radio'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       size: sizeT
       options: optionT[]
     }
   }
   | {
-    value: '3'
+    value: 'rate'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       size: sizeT | number
       count: number
@@ -64,10 +64,10 @@ export type formItemT =
     }
   }
   | {
-    value: '4'
+    value: 'select'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       size: sizeT
       multiple: boolean
@@ -77,10 +77,10 @@ export type formItemT =
     }
   }
   | {
-    value: '5'
+    value: 'slider'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       max: number
       min: number
@@ -92,20 +92,20 @@ export type formItemT =
     }
   }
   | {
-    value: '6'
+    value: 'switch'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       round: boolean
       size: sizeT
     }
   }
   | {
-    value: '7'
+    value: 'timePicker'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       actions: ('now' | 'confirm')[]
       clearable: boolean
@@ -116,20 +116,20 @@ export type formItemT =
     }
   }
   | {
-    value: '8'
+    value: 'treeSelect'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       size: sizeT
       clearable: boolean
     }
   }
   | {
-    value: '9'
+    value: 'upload'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       accept: addUndefined<string>
       action: addUndefined<string>
@@ -150,10 +150,10 @@ export type formItemT =
     }
   }
   | {
-    value: '10'
+    value: 'colorPicker'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       size: sizeT
       modes: Array<'rgb' | 'hex' | 'hsl' | 'hsv'>
@@ -162,10 +162,10 @@ export type formItemT =
     }
   }
   | {
-    value: '11'
+    value: 'checkbox'
     formItemConfig: {
       label: string
-      key: addUndefined<string>
+      key: string
       rules: Array<any>
       max: addUndefined<number>
       min: addUndefined<number>
@@ -173,10 +173,10 @@ export type formItemT =
     }
   }
   | {
-    value: '12'
+    value: 'datePicker'
     formItemConfig: {
-      label: 'datePicker'
-      key: addUndefined<string>
+      label: string
+      key: string
       rules: []
       actions: []
       clearable: false
@@ -190,7 +190,7 @@ export type formItemT =
     }
   }
   | {
-    value: '13'
+    value: 'divider'
     formItemConfig: {
       label: string
       dashed: boolean
@@ -201,7 +201,7 @@ export type formItemT =
 
 export const options: formItemT[] = [
   {
-    value: '0',
+    value: 'input',
     formItemConfig: {
       label: 'input',
       key: 'input',
@@ -214,7 +214,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '1',
+    value: 'inputNumber',
     formItemConfig: {
       label: 'inputNumber',
       key: 'inputNumber',
@@ -228,7 +228,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '2',
+    value: 'radio',
     formItemConfig: {
       label: 'radio',
       key: 'radio',
@@ -238,7 +238,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '3',
+    value: 'rate',
     formItemConfig: {
       label: 'rate',
       key: 'rate',
@@ -249,7 +249,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '4',
+    value: 'select',
     formItemConfig: {
       label: 'select',
       key: 'select',
@@ -262,7 +262,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '5',
+    value: 'slider',
     formItemConfig: {
       label: 'slider',
       key: 'slider',
@@ -277,7 +277,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '6',
+    value: 'switch',
     formItemConfig: {
       label: 'switch',
       key: 'switch',
@@ -287,7 +287,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '7',
+    value: 'timePicker',
     formItemConfig: {
       label: 'timePicker',
       key: 'timePicker',
@@ -301,7 +301,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '12',
+    value: 'datePicker',
     formItemConfig: {
       label: 'datePicker',
       key: 'datePicker',
@@ -318,7 +318,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '8',
+    value: 'treeSelect',
     formItemConfig: {
       label: 'treeSelect',
       key: 'treeSelect',
@@ -328,7 +328,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '9',
+    value: 'upload',
     formItemConfig: {
       label: 'upload',
       key: 'upload',
@@ -352,7 +352,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '10',
+    value: 'colorPicker',
     formItemConfig: {
       label: 'colorPicker',
       key: 'colorPicker',
@@ -364,7 +364,7 @@ export const options: formItemT[] = [
     },
   },
   {
-    value: '11',
+    value: 'checkbox',
     formItemConfig: {
       label: 'checkbox',
       key: 'checkbox',
@@ -378,7 +378,7 @@ export const options: formItemT[] = [
 
 export const LayoutOptions: formItemT[] = [
   {
-    value: '13',
+    value: 'divider',
     formItemConfig: {
       label: 'divider',
       dashed: false,
@@ -404,7 +404,9 @@ export const initialFormState: State['formConfig'] = {
 export const UI_NAME = 'naive-ui'
 export const PREFIX = 'n'
 
-export const getItemConfig = (value: ValueType): formItemT | undefined => {
+export const getItemConfig = (
+  value: formItemT['value'],
+): formItemT | undefined => {
   const mergeOptions = [...options, ...LayoutOptions]
   const config = mergeOptions.find(item => item.value === value)
   if (config !== undefined)
@@ -431,7 +433,7 @@ export const ruleOptions: Array<{
 
 // 0---string 1---booleanOrNumber 2---value
 export const componentPropsConfig = {
-  0: {
+  input: {
     key: 2,
     clearable: 1,
     maxlength: 1,
@@ -439,7 +441,7 @@ export const componentPropsConfig = {
     type: 0,
     size: 0,
   },
-  1: {
+  inputNumber: {
     key: 2,
     clearable: 1,
     max: 1,
@@ -449,24 +451,24 @@ export const componentPropsConfig = {
     step: 1,
     showButton: 1,
   },
-  2: {
+  radio: {
     key: 2,
     size: 0,
   },
-  3: {
+  rate: {
     key: 2,
     size: 0,
     count: 1,
     allowHalf: 1,
   },
-  4: {
+  select: {
     key: 2,
     size: 0,
     multiple: 1,
     placeholder: 0,
     clearable: 1,
   },
-  5: {
+  slider: {
     key: 2,
     max: 1,
     min: 1,
@@ -476,12 +478,12 @@ export const componentPropsConfig = {
     vertical: 1,
     tooltip: 1,
   },
-  6: {
+  switch: {
     key: 2,
     round: 1,
     size: 0,
   },
-  7: {
+  timePicker: {
     key: 2,
     clearable: 1,
     format: 0,
@@ -489,12 +491,12 @@ export const componentPropsConfig = {
     placeholder: 0,
     use12Hours: 1,
   },
-  8: {
+  treeSelect: {
     key: 2,
     size: 0,
     clearable: 1,
   },
-  9: {
+  upload: {
     accept: 0,
     action: 0,
     defaultUpload: 1,
@@ -510,17 +512,17 @@ export const componentPropsConfig = {
     showRetryButton: 1,
     showFileList: 1,
   },
-  10: {
+  colorPicker: {
     key: 2,
     size: 0,
     showAlpha: 1,
   },
-  11: {
+  checkbox: {
     key: 2,
     max: 1,
     min: 1,
   },
-  12: {
+  datePicker: {
     key: 2,
     clearable: 1,
     format: 0,
@@ -531,7 +533,7 @@ export const componentPropsConfig = {
     endPlaceholder: 0,
     separator: 0,
   },
-  13: {
+  divider: {
     dashed: 1,
     vertical: 1,
     titlePlacement: 0,

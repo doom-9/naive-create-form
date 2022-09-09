@@ -4,8 +4,9 @@ import {
   componentPropsConfig,
   formPropsConfig,
 } from '../const/const'
-import type { ValueType, formItemType } from '../store'
+import type { formItemType } from '../store'
 import { store } from '../store'
+import type { ProFormItem } from '../../lib/components/proForm/types/props'
 
 export function isValidKey(
   key: string | number | symbol,
@@ -88,7 +89,7 @@ const bindFileListConfig = (config: bindConfig): string => {
 // formItemConfig
 
 const getFormItemConfig = (item: formItemType): string => {
-  if (item.value === '13')
+  if (item.value === 'divider')
     return ''
   const strArray = []
 
@@ -106,9 +107,9 @@ const getFormItemConfig = (item: formItemType): string => {
 
 const getFormItemContentConfig = (
   item: formItemType['formItemConfig'],
-  type: ValueType,
+  type: formItemType['value'],
 ): string => {
-  const isUpload = type === '9'
+  const isUpload = type === 'upload'
 
   const propsConfig = componentPropsConfig[type]
 
@@ -153,17 +154,17 @@ const getTypeToFormItem = (item: formItemType): string => {
     type,
   )
   switch (type) {
-    case '0':
+    case 'input':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-input ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '1':
+    case 'inputNumber':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-input-number ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '2':
+    case 'radio':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-radio-group ${formItemContentConfig}>
@@ -177,49 +178,49 @@ const getTypeToFormItem = (item: formItemType): string => {
           </${PREFIX}-space>
         </${PREFIX}-radio-group>
       </${PREFIX}-form-item>`
-    case '3':
+    case 'rate':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-rate ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '4':
+    case 'select':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-select ${formItemContentConfig} />
       </${PREFIX}-form-item>`
-    case '5':
+    case 'slider':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-slider ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '6':
+    case 'switch':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-switch ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '7':
+    case 'timePicker':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-time-picker ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '8':
+    case 'treeSelect':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
           <${PREFIX}-tree-select ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '9':
+    case 'upload':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-upload ${formItemContentConfig}>
           <${PREFIX}-button>上传文件</${PREFIX}-button>
         </${PREFIX}-upload>
       </${PREFIX}-form-item>`
-    case '10':
+    case 'colorPicker':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-color-picker ${formItemContentConfig}/>
       </${PREFIX}-form-item>`
-    case '11':
+    case 'checkbox':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-checkbox-group ${formItemContentConfig}>
@@ -233,12 +234,12 @@ const getTypeToFormItem = (item: formItemType): string => {
           </${PREFIX}-space>
         </${PREFIX}-checkbox-group>
       </${PREFIX}-form-item>`
-    case '13':
+    case 'divider':
       return `
         <${PREFIX}-divider ${formItemContentConfig}>${
         item.formItemConfig.label ?? ''
       }</${PREFIX}-divider>`
-    case '12':
+    case 'datePicker':
       return `
       <${PREFIX}-form-item ${formItemConfig}>
         <${PREFIX}-date-picker ${formItemContentConfig}/>
@@ -342,7 +343,7 @@ const getRulesObject = (data: formItemType[]): string => {
 
   for (let i = 0; i < data.length; i++) {
     const item = data[i]
-    if (item.value === '13')
+    if (item.value === 'divider')
       continue
     const rules = item.formItemConfig.rules
     const itemRulesArray: string[] = []
@@ -458,7 +459,19 @@ export const generateCode = (data: formItemType[]): string => {
 }
 
 export const generateConfig = (): string => {
-  const Code = JSON.stringify(store.state.formItemArray)
+  const array: ProFormItem[] = []
 
-  return Code
+  store.state.formItemArray.forEach((item) => {
+    if (item.value !== 'treeSelect' && item.value !== 'divider') {
+      const config: ProFormItem = {
+        type: item.value,
+        label: item.formItemConfig.label,
+        key: item.formItemConfig.key,
+      }
+
+      array.push(config)
+    }
+  })
+
+  return JSON.stringify(array)
 }
