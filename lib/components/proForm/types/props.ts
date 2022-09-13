@@ -109,8 +109,6 @@ export type ProFormItem =
     text: string
   }
 
-export type ProFormItemType = 'input' | 'radio'
-
 export interface requestConfig {
   methods?: reqType
   url: string

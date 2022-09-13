@@ -1,3 +1,5 @@
-import ProFrom from './components/proForm/index'
+import ProForm from './components/proForm/index'
+import type { ProFormItem } from './components/proForm/types/props'
 
-export { ProFrom }
+export { ProForm }
+export type { ProFormItem }
