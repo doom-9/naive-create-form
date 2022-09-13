@@ -1,5 +1,5 @@
 {
-  "name": "naive-create-form",
+  "name": "n-pro-form",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -15,16 +15,6 @@
     "test": "vitest",
     "publish": "npm run lib-build && np",
     "login": "npm login --registry https://registry.npmjs.org/"
-  },
-  "dependencies": {
-    "@types/uuid": "^8.3.4",
-    "@vicons/antd": "^0.11.0",
-    "highlight.js": "^11.6.0",
-    "naive-ui": "^2.33.2",
-    "uuid": "^8.3.2",
-    "vue": "^3.2.39",
-    "vue3-i18n-plugin": "^1.0.9",
-    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
@@ -43,7 +33,15 @@
     "vite-plugin-dts": "^1.5.0",
     "vitepress": "^1.0.0-draft.8",
     "vitest": "^0.19.1",
-    "vue-tsc": "^0.40.13"
+    "vue-tsc": "^0.40.13",
+    "@types/uuid": "^8.3.4",
+    "@vicons/antd": "^0.11.0",
+    "highlight.js": "^11.6.0",
+    "naive-ui": "^2.33.2",
+    "uuid": "^8.3.2",
+    "vue": "^3.2.39",
+    "vue3-i18n-plugin": "^1.0.9",
+    "vuex": "^4.0.2"
   },
   "peerDependencies": {
     "naive-ui": "^2.32.0"
