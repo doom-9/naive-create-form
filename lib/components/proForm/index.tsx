@@ -73,7 +73,7 @@ const ProFormProps = {
   'onError': Function as PropType<FormValidateCallback>,
   'onValidate': Function as PropType<(value: Record<string, any>) => void>,
   'onValuesChange': Function as PropType<(key: string, value: any) => void>,
-  'onModalShowChange': Function as PropType<(value: boolean) => void>,
+  'onUpdateModalShow': Function as PropType<(value: boolean) => void>,
   'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
   'requestConfig': Object as PropType<requestConfig>,
   'onUpdate:modelValue': Function as PropType<
@@ -492,7 +492,7 @@ export default defineComponent({
     })
 
     const handleModalShowChange = (value: boolean) => {
-      props.onModalShowChange && props.onModalShowChange(value)
+      props.onUpdateModalShow && props.onUpdateModalShow(value)
       props['onUpdate:modalShow'] && props['onUpdate:modalShow'](value)
     }
 

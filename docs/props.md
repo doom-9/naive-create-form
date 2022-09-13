@@ -19,5 +19,5 @@
 | onValidate         | (value: Record<string, any>) => void | undefined | 点击`校验`按钮的回调 |
 | onValuesChange     |  (key: string, value: any) => void   | undefined | 表单项数据改变的回调 |
 | onUpdateModelValue | (value: Record<string, any>) => void | undefined | 表单项数据改变的回调 |
-| onModalShowChange  |       (value: boolean) => void       | undefined | modal 显示隐藏的回调 |
+| onUpdateModalShow  |       (value: boolean) => void       | undefined | modal 显示隐藏的回调 |
 | requestConfig      |            requestConfig             | undefined | 请求配置             |
