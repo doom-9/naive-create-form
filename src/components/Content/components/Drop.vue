@@ -30,7 +30,8 @@ const callback = function (mutationsList: any) {
 const observer = new MutationObserver(callback)
 onMounted(() => {
   if (dropContainerElement.value)
-    observer.observe(dropContainerElement.value, config)
+    // 这里的as有疑惑
+    observer.observe(dropContainerElement.value as Node, config)
 })
 onUnmounted(() => {
   observer.disconnect()
@@ -59,7 +60,9 @@ const handleTranslate = () => {
         (dropElementValue as HTMLDivElement).style.transform
           = 'translateY(0px)'
       }
-      else { (dropElementValue as HTMLDivElement).style.transform = upStr }
+      else {
+        (dropElementValue as HTMLDivElement).style.transform = upStr
+      }
     }
 
     // 往上拖动
@@ -70,7 +73,9 @@ const handleTranslate = () => {
         (dropElementValue as HTMLDivElement).style.transform
           = 'translateY(0px)'
       }
-      else { (dropElementValue as HTMLDivElement).style.transform = downStr }
+      else {
+        (dropElementValue as HTMLDivElement).style.transform = downStr
+      }
     }
 
     if (dragElementValue !== null) {
