@@ -2,6 +2,7 @@
 import { useStore } from 'vuex'
 import { useConfig } from '../../../../utils/hook/useConfig'
 import { ruleOptions } from '../../../../const/const'
+import type { State } from '../../../../store'
 
 const formValue = useConfig<{
   label: string | undefined
@@ -25,7 +26,7 @@ const onCreate = () => {
     value: '',
   }
 }
-const store = useStore()
+const store = useStore<State>()
 const handleSubmit = () => {
   store.commit('changeSelectedFormItemConfig', formValue.value)
 }

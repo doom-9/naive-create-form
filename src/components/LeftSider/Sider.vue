@@ -2,8 +2,9 @@
 import { useStore } from 'vuex'
 import { useMessage } from 'naive-ui'
 import { LayoutOptions, options } from '../../const/const'
+import type { State } from '../../store'
 
-const store = useStore()
+const store = useStore<State>()
 window.$message = useMessage()
 const handleAddClick = (value: string) => {
   store.commit('add', {
@@ -20,7 +21,7 @@ const handleLayoutAddClick = (value: string) => {
 <template>
   <n-space vertical>
     <n-divider title-placement="center">
-      {{ $t('formComponent') }}
+      {{ $t("formComponent") }}
     </n-divider>
     <n-button
       v-for="item in options"
@@ -32,7 +33,7 @@ const handleLayoutAddClick = (value: string) => {
       {{ $t(item.formItemConfig.label) }}
     </n-button>
     <n-divider title-placement="center">
-      {{ $t('layoutComponent') }}
+      {{ $t("layoutComponent") }}
     </n-divider>
     <n-button
       v-for="item in LayoutOptions"

@@ -96,14 +96,14 @@ const selectedFormItem = computed(() => {
           </div>
           <n-form-item :label="item.formItemConfig.label">
             <n-input
-              v-if="item.value === '0'"
+              v-if="item.value === 'input'"
               :clearable="item.formItemConfig.clearable"
               :maxlength="item.formItemConfig.maxlength"
               :type="item.formItemConfig.type"
               :size="item.formItemConfig.size"
             />
             <n-input-number
-              v-else-if="item.value === '1'"
+              v-else-if="item.value === 'inputNumber'"
               :clearable="item.formItemConfig.clearable"
               :max="item.formItemConfig.max"
               :min="item.formItemConfig.min"
@@ -112,7 +112,7 @@ const selectedFormItem = computed(() => {
               :show-button="item.formItemConfig.showButton"
             />
             <n-radio-group
-              v-else-if="item.value === '2'"
+              v-else-if="item.value === 'radio'"
               :size="item.formItemConfig.size"
             >
               <n-space>
@@ -131,13 +131,13 @@ const selectedFormItem = computed(() => {
               </n-space>
             </n-radio-group>
             <n-rate
-              v-else-if="item.value === '3'"
+              v-else-if="item.value === 'rate'"
               :count="item.formItemConfig.count"
               :size="item.formItemConfig.size"
               :allow-half="item.formItemConfig.allowHalf"
             />
             <n-select
-              v-else-if="item.value === '4'"
+              v-else-if="item.value === 'select'"
               :multiple="item.formItemConfig.multiple"
               :size="item.formItemConfig.size"
               :placeholder="item.formItemConfig.placeholder"
@@ -152,7 +152,7 @@ const selectedFormItem = computed(() => {
               "
             />
             <n-slider
-              v-else-if="item.value === '5'"
+              v-else-if="item.value === 'slider'"
               :default-value="[0, 0]"
               :max="item.formItemConfig.max"
               :min="item.formItemConfig.min"
@@ -163,12 +163,12 @@ const selectedFormItem = computed(() => {
               :tooltip="item.formItemConfig.tooltip"
             />
             <n-switch
-              v-else-if="item.value === '6'"
+              v-else-if="item.value === 'switch'"
               :round="item.formItemConfig.round"
               :size="item.formItemConfig.size"
             />
             <n-time-picker
-              v-else-if="item.value === '7'"
+              v-else-if="item.value === 'timePicker'"
               :size="item.formItemConfig.size"
               :actions="item.formItemConfig.actions"
               :clearable="item.formItemConfig.clearable"
@@ -177,7 +177,7 @@ const selectedFormItem = computed(() => {
               :use-12-hours="item.formItemConfig.use12Hours"
             />
             <n-tree-select
-              v-else-if="item.value === '8'"
+              v-else-if="item.value === 'treeSelect'"
               :size="item.formItemConfig.size"
               :clearable="item.formItemConfig.clearable"
               :options="[
@@ -194,7 +194,7 @@ const selectedFormItem = computed(() => {
               ]"
             />
             <n-upload
-              v-else-if="item.value === '9'"
+              v-else-if="item.value === 'upload'"
               :accept="item.formItemConfig.accept"
               :action="item.formItemConfig.action"
               :default-upload="item.formItemConfig.defaultUpload"
@@ -213,14 +213,14 @@ const selectedFormItem = computed(() => {
               <n-button>上传文件</n-button>
             </n-upload>
             <n-color-picker
-              v-else-if="item.value === '10'"
+              v-else-if="item.value === 'colorPicker'"
               :size="item.formItemConfig.size"
               :modes="item.formItemConfig.modes"
               :show-alpha="item.formItemConfig.showAlpha"
               :actions="item.formItemConfig.actions"
             />
             <n-checkbox-group
-              v-else-if="item.value === '11'"
+              v-else-if="item.value === 'checkbox'"
               :max="item.formItemConfig.max"
               :min="item.formItemConfig.min"
             >
@@ -236,7 +236,7 @@ const selectedFormItem = computed(() => {
               </n-space>
             </n-checkbox-group>
             <n-date-picker
-              v-else-if="item.value === '12'"
+              v-else-if="item.value === 'datePicker'"
               :actions="item.formItemConfig.actions"
               :clearable="item.formItemConfig.clearable"
               :format="item.formItemConfig.format"
@@ -248,7 +248,7 @@ const selectedFormItem = computed(() => {
               :separator="item.formItemConfig.separator"
             />
             <n-divider
-              v-else-if="item.value === '13'"
+              v-else-if="item.value === 'divider'"
               :dashed="item.formItemConfig.dashed"
               :vertical="item.formItemConfig.vertical"
               :title-placement="item.formItemConfig.titlePlacement"

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { FormValidate } from 'naive-ui/es/form/src/interface'
 import { useStore } from 'vuex'
+import type { State } from '../../../../store'
 
 const showModal = ref<boolean>(false)
 const cancelCallback = () => {}
@@ -16,13 +17,16 @@ const formValue = ref({
   confirmAndCancelBtn: false,
 })
 
-const store = useStore()
+const store = useStore<State>()
 const handleValidateClick = () => {
   if (formRef.value) {
     formRef.value.validate((errors) => {
       if (!errors) {
         store.commit('changeAutoAddImport', formValue.value.import)
-        store.commit('changeConfirmAndCancelBtn', formValue.value.confirmAndCancelBtn)
+        store.commit(
+          'changeConfirmAndCancelBtn',
+          formValue.value.confirmAndCancelBtn,
+        )
       }
       else {
         // console.log(errors)

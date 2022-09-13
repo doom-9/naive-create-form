@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import type { State } from '../../store'
 import FormConfig from './components/FormConfig/FormConfig.vue'
 import InputFormItemConfig from './components/FormItemConfig/InputFormItemConfig.vue'
 import CheckBoxFormItemConfig from './components/FormItemConfig/CheckBoxFormItemConfig.vue'
@@ -17,7 +18,7 @@ import UploadFormItemConfig from './components/FormItemConfig/UploadFormItemConf
 import InputNumberFormItemConfig from './components/FormItemConfig/InputNumberFormItemConfig.vue'
 import DividerConfig from './components/FormItemConfig/DividerConfig.vue'
 
-const store = useStore()
+const store = useStore<State>()
 const selectedFormItemType = computed(() => {
   return store.state.selectedFormItemType
 })
@@ -34,33 +35,33 @@ const handleAddClick = () => {
 }
 const showComponent = computed(() => {
   switch (selectedFormItemType.value) {
-    case '0':
+    case 'input':
       return InputFormItemConfig
-    case '1':
+    case 'inputNumber':
       return InputNumberFormItemConfig
-    case '2':
+    case 'radio':
       return RadioFormItemConfig
-    case '3':
+    case 'rate':
       return RateFormItemConfig
-    case '4':
+    case 'select':
       return SelectFormItemConfig
-    case '5':
+    case 'slider':
       return SliderFormItemConfig
-    case '6':
+    case 'switch':
       return SwitchFormItemConfig
-    case '7':
+    case 'timePicker':
       return TimePickerFormItemConfig
-    case '8':
+    case 'treeSelect':
       return TreeSelectFormItemConfig
-    case '9':
+    case 'upload':
       return UploadFormItemConfig
-    case '10':
+    case 'colorPicker':
       return ColorPickerFormItemConfig
-    case '11':
+    case 'checkbox':
       return CheckBoxFormItemConfig
-    case '12':
+    case 'datePicker':
       return DatePickerFormItemConfig
-    case '13':
+    case 'divider':
       return DividerConfig
     default:
       return ''
@@ -77,7 +78,7 @@ const handleTabsChange = (val: 'form' | 'formItem') => {
 
 <template>
   <n-divider title-placement="left">
-    {{ $t('setUp') }}
+    {{ $t("setUp") }}
   </n-divider>
   <n-tabs type="segment" :value="tabsValue" @update:value="handleTabsChange">
     <n-tab-pane name="formItem" :tab="$t('formItemConfiguration')">
@@ -87,7 +88,7 @@ const handleTabsChange = (val: 'form' | 'formItem') => {
       >
         <template #extra>
           <n-button @click="handleAddClick">
-            {{ $t('addFormItemAndSelect') }}
+            {{ $t("addFormItemAndSelect") }}
           </n-button>
         </template>
       </n-empty>

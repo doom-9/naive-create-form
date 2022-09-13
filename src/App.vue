@@ -9,6 +9,7 @@ import javascript from 'highlight.js/lib/languages/javascript'
 
 import { changeLocal } from 'vue3-i18n-plugin'
 import Layout from './components/Layout/Layout.vue'
+import type { State } from './store'
 
 hljs.registerLanguage('javascript', javascript)
 const theme = ref<null | BuiltInGlobalTheme>(null)
@@ -21,7 +22,7 @@ const changeTheme = () => {
   else theme.value = null
 }
 
-const store = useStore()
+const store = useStore<State>()
 const changeLocale = () => {
   if (locale.value === null) {
     locale.value = zhCN

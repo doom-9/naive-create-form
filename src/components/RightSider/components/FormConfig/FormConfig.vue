@@ -8,7 +8,7 @@ import { copyPropertyValue } from '../../../../utils/index'
 const formValue = ref<State['formConfig']>({
   ...initialFormState,
 })
-const store = useStore()
+const store = useStore<State>()
 watch(
   formValue,
   () => {
@@ -20,7 +20,11 @@ watch(
 )
 const handleResetClick = () => {
   Object.keys(initialFormState).forEach((key) => {
-    copyPropertyValue(formValue.value, initialFormState, key as keyof State['formConfig'])
+    copyPropertyValue(
+      formValue.value,
+      initialFormState,
+      key as keyof State['formConfig'],
+    )
   })
 }
 </script>
@@ -99,7 +103,7 @@ const handleResetClick = () => {
   </n-form>
   <n-space>
     <n-button type="warning" @click="handleResetClick">
-      {{ $t('reset') }}
+      {{ $t("reset") }}
     </n-button>
   </n-space>
 </template>

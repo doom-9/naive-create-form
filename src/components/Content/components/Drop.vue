@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from 'vuex'
+import type { State } from '../../../store'
 import { getParentElement } from '../../../utils/index'
 
 const margin = 15
-const store = useStore()
+const store = useStore<State>()
 const dragId = ref<string | null>(null)
 const dropId = ref<string | null>(null)
 const dropContainerElement = ref<HTMLDivElement | null>(null)
@@ -54,22 +55,22 @@ const handleTranslate = () => {
     if (dropDataIndex > dragDataIndex) {
       const transformStr = (dropElementValue as HTMLDivElement).style.transform
 
-      if (transformStr === downStr)
-        (dropElementValue as HTMLDivElement).style.transform = 'translateY(0px)'
-
-      else
-        (dropElementValue as HTMLDivElement).style.transform = upStr
+      if (transformStr === downStr) {
+        (dropElementValue as HTMLDivElement).style.transform
+          = 'translateY(0px)'
+      }
+      else { (dropElementValue as HTMLDivElement).style.transform = upStr }
     }
 
     // 往上拖动
     if (dropDataIndex < dragDataIndex) {
       const transformStr = (dropElementValue as HTMLDivElement).style.transform
 
-      if (transformStr === upStr)
-        (dropElementValue as HTMLDivElement).style.transform = 'translateY(0px)'
-
-      else
-        (dropElementValue as HTMLDivElement).style.transform = downStr
+      if (transformStr === upStr) {
+        (dropElementValue as HTMLDivElement).style.transform
+          = 'translateY(0px)'
+      }
+      else { (dropElementValue as HTMLDivElement).style.transform = downStr }
     }
 
     if (dragElementValue !== null) {
@@ -102,14 +103,22 @@ const handleDragStart = (e: DragEvent) => {
     dragId.value = ele.id
     dragElement.value = ele
     dragElement.value!.style.visibility = 'hidden'
-    initDragElementDataIndex.value = Number(dragElement.value.getAttribute('data-index'))
+    initDragElementDataIndex.value = Number(
+      dragElement.value.getAttribute('data-index'),
+    )
   }
 }
 
 const handleDragEnd = () => {
-  if (dragId.value !== null && dropId.value !== null && dragElement.value !== null) {
+  if (
+    dragId.value !== null
+    && dropId.value !== null
+    && dragElement.value !== null
+  ) {
     dragElement.value!.style.visibility = 'visible'
-    const nowDragDataIndex = Number(dragElement.value.getAttribute('data-index'))
+    const nowDragDataIndex = Number(
+      dragElement.value.getAttribute('data-index'),
+    )
     if (nowDragDataIndex === initDragElementDataIndex.value)
       return
 
