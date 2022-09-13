@@ -1,5 +1,5 @@
 {
-  "name": "n-pro-form",
+  "name": "naive-create-form",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
