@@ -61,10 +61,6 @@
     ]
   },
   "license": "MIT",
-  "files": [
-    "es",
-    "README.md"
-  ],
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
