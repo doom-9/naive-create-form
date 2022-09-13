@@ -80,6 +80,7 @@ const ProFormProps = {
     (res: Record<string, any>) => void
   >,
   'onUpdateModelValue': Function as PropType<(res: Record<string, any>) => void>,
+  'transform': Function as PropType<(value: Record<string, any>) => any>,
 }
 
 export default defineComponent({
@@ -130,26 +131,28 @@ export default defineComponent({
     }
 
     const handleSubmitClick = () => {
+      const { onFinish, onError, transform } = props
       formRef.value?.validate(async (errors) => {
         if (!errors) {
           const requestConfig = props.requestConfig
           let res: Record<string, any>
+          const data = transform ? transform(modalData) : modalData
           if (requestConfig === undefined) {
-            res = modalData
+            res = data
           }
           else {
             res = await request(
               requestConfig.methods,
               requestConfig.url,
-              modalData,
+              data,
               requestConfig.headers,
             )
           }
 
-          props?.onFinish && props.onFinish(res)
+          onFinish && onFinish(res)
         }
         else {
-          props?.onError && props.onError(errors)
+          onError && onError(errors)
         }
       })
     }
