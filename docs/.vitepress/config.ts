@@ -9,8 +9,9 @@ export default {
         items: [
           { text: '基础示例', link: '/base' },
           { text: '参数', link: '/props' },
-          { text: 'initialValues示例', link: '/initialValues' },
           { text: 'modal示例', link: '/modal' },
+          { text: 'button示例', link: '/button' },
+          { text: 'initialValues示例', link: '/initialValues' },
           { text: 'tooltipConfig示例', link: '/tooltipConfig' },
           { text: 'autoPlaceholder示例', link: '/autoPlaceholder' },
         ],
