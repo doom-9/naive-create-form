@@ -1,5 +1,8 @@
 import ProForm from './components/proForm/index'
-import type { ProFormItem } from './components/proForm/types/props'
+import type {
+  ProFormItem,
+  requestConfig,
+} from './components/proForm/types/props'
 
 export { ProForm }
-export type { ProFormItem }
+export type { ProFormItem, requestConfig }
