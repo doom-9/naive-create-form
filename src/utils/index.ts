@@ -21,20 +21,20 @@ interface bindConfig {
 }
 
 const typeToImport: Record<string, string[]> = {
-  0: ['Input'],
-  1: ['InputNumber'],
-  2: ['Radio', 'RadioGroup', 'Space'],
-  3: ['Rate'],
-  4: ['Select'],
-  5: ['Slider'],
-  6: ['Switch'],
-  7: ['TimePicker'],
-  8: ['TreeSelect'],
-  9: ['Upload'],
-  10: ['ColorPicker'],
-  11: ['Checkbox', 'CheckboxGroup', 'Space'],
-  12: ['DatePicker'],
-  13: ['Divider'],
+  input: ['Input'],
+  inputNumber: ['InputNumber'],
+  radio: ['Radio', 'RadioGroup', 'Space'],
+  rate: ['Rate'],
+  select: ['Select'],
+  slider: ['Slider'],
+  switch: ['Switch'],
+  timePicker: ['TimePicker'],
+  treeSelect: ['TreeSelect'],
+  upload: ['Upload'],
+  colorPicker: ['ColorPicker'],
+  checkbox: ['Checkbox', 'CheckboxGroup', 'Space'],
+  datePicker: ['DatePicker'],
+  divider: ['Divider'],
 }
 
 // bind
