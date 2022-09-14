@@ -1,4 +1,5 @@
 import type {
+  AutoCompleteProps,
   CheckboxGroupProps,
   CheckboxProps,
   ColorPickerProps,
@@ -108,6 +109,12 @@ export type ProFormItem =
     vertical?: boolean
     text: string
   }
+  | addCommonProps<{
+    type: 'autoComplete'
+    props?: Omit<AutoCompleteProps, 'onUpdateValue' | 'value' | 'options'>
+    valueEnum?: string[]
+    splitString: string
+  }>
 
 export interface requestConfig {
   methods?: reqType

@@ -19,6 +19,7 @@ import type {
   RadioGroupProps,
 } from 'naive-ui'
 import {
+  NAutoComplete,
   NButton,
   NCheckbox,
   NCheckboxGroup,
@@ -68,19 +69,19 @@ const ProFormProps = {
   'initialValues': Object as PropType<Record<string, any>>,
   'modelValue': Object as PropType<Record<string, any>>,
   'autoPlaceholder': Boolean,
+  'requestConfig': Object as PropType<requestConfig>,
+  'transform': Function as PropType<(value: Record<string, any>) => any>,
   'onReset': Function as PropType<() => void>,
   'onFinish': Function as PropType<(res: Record<string, any>) => void>,
   'onError': Function as PropType<FormValidateCallback>,
   'onValidate': Function as PropType<(value: Record<string, any>) => void>,
-  'onValuesChange': Function as PropType<(key: string, value: any) => void>,
   'onUpdateModalShow': Function as PropType<(value: boolean) => void>,
   'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
-  'requestConfig': Object as PropType<requestConfig>,
+  'onValuesChange': Function as PropType<(key: string, value: any) => void>,
   'onUpdate:modelValue': Function as PropType<
     (res: Record<string, any>) => void
   >,
   'onUpdateModelValue': Function as PropType<(res: Record<string, any>) => void>,
-  'transform': Function as PropType<(value: Record<string, any>) => any>,
 }
 
 export default defineComponent({
@@ -389,6 +390,26 @@ export default defineComponent({
                 handleInputUpdateValue(value, item.key)
               }}
               value={modalData[item.key]}
+            />
+          )
+
+        case 'autoComplete':
+          return (
+            <NAutoComplete
+              {...item.props}
+              value={modalData[item.key]}
+              onUpdateValue={(value) => {
+                handleInputUpdateValue(value, item.key)
+              }}
+              options={item.valueEnum?.map((suffix) => {
+                const prefix = modalData[item.key].value.split(
+                  item.splitString,
+                )[0]
+                return {
+                  label: prefix + suffix,
+                  value: prefix + suffix,
+                }
+              })}
             />
           )
 
