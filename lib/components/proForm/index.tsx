@@ -436,7 +436,11 @@ export default defineComponent({
         else {
           if (autoPlaceholder) {
             let text: string
-            if (item.type === 'input' || item.type === 'inputNumber') {
+            if (
+              item.type === 'input'
+              || item.type === 'inputNumber'
+              || item.type === 'autoComplete'
+            ) {
               text = `请输入${item.label}`
 
               if (item.props) {
