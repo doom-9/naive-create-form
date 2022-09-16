@@ -13,6 +13,7 @@ import {
 } from 'vue'
 import type {
   CheckboxGroupProps,
+  DrawerProps,
   FormInst,
   FormProps,
   ModalProps,
@@ -26,6 +27,7 @@ import {
   NColorPicker,
   NDatePicker,
   NDivider,
+  NDrawer,
   NForm,
   NFormItem,
   NIcon,
@@ -52,7 +54,10 @@ import type { ProFormItem, requestConfig } from './types/props'
 const ProFormProps = {
   'modal': Boolean,
   'modalShow': Boolean,
-  'modalProps': Object as PropType<Omit<ModalProps, 'show'>>,
+  'modalProps': Object as PropType<Omit<ModalProps, 'show' | 'onUpdateShow'>>,
+  'drawer': Boolean,
+  'drawerShow': Boolean,
+  'drawerProps': Object as PropType<Omit<DrawerProps, 'show' | 'onUpdateShow'>>,
   'formProps': Object as PropType<Omit<FormProps, 'model' | 'preset'>>,
   'formItems': {
     type: Array as PropType<ProFormItem[]>,
@@ -77,11 +82,13 @@ const ProFormProps = {
   'onValidate': Function as PropType<(value: Record<string, any>) => void>,
   'onUpdateModalShow': Function as PropType<(value: boolean) => void>,
   'onUpdate:modalShow': Function as PropType<(value: boolean) => void>,
-  'onValuesChange': Function as PropType<(key: string, value: any) => void>,
   'onUpdate:modelValue': Function as PropType<
     (res: Record<string, any>) => void
   >,
   'onUpdateModelValue': Function as PropType<(res: Record<string, any>) => void>,
+  'onUpdateDrawerShow': Function as PropType<(value: boolean) => void>,
+  'onUpdate:drawerShow': Function as PropType<(value: boolean) => void>,
+  'onValuesChange': Function as PropType<(key: string, value: any) => void>,
 }
 
 export default defineComponent({
@@ -521,6 +528,11 @@ export default defineComponent({
       props['onUpdate:modalShow'] && props['onUpdate:modalShow'](value)
     }
 
+    const handleDrawerShowChange = (value: boolean) => {
+      props.onUpdateDrawerShow && props.onUpdateDrawerShow(value)
+      props['onUpdate:drawerShow'] && props['onUpdate:drawerShow'](value)
+    }
+
     return {
       modalData,
       formRef,
@@ -530,6 +542,7 @@ export default defineComponent({
       handleResetClick,
       handleSubmitClick,
       handleModalShowChange,
+      handleDrawerShowChange,
       Vnode,
       BtnsVnode,
     }
@@ -544,7 +557,11 @@ export default defineComponent({
       modal,
       modalShow,
       modalProps,
+      drawer,
+      drawerShow,
+      drawerProps,
       handleModalShowChange,
+      handleDrawerShowChange,
     } = this
 
     return modal
@@ -565,7 +582,21 @@ export default defineComponent({
         {BtnsVnode}
       </NModal>
         )
-      : (
+      : drawer
+        ? (
+      <NDrawer
+        show={drawerShow}
+        {...drawerProps}
+        onUpdateShow={handleDrawerShowChange}
+      >
+        {title ? <NDivider>{title}</NDivider> : null}
+        <NForm {...formProps} model={modalData} ref="formRef">
+          {Vnode}
+        </NForm>
+        {BtnsVnode}
+      </NDrawer>
+          )
+        : (
       <Fragment>
         {title ? <NDivider>{title}</NDivider> : null}
         <NForm {...formProps} model={modalData} ref="formRef">
@@ -573,6 +604,6 @@ export default defineComponent({
         </NForm>
         {BtnsVnode}
       </Fragment>
-        )
+          )
   },
 })
