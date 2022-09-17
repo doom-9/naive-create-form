@@ -120,6 +120,12 @@ export type ProFormItem =
     key: string
   }
 
+export interface stepsProFormItem {
+  key: string
+  title: string
+  formItems: ProFormItem[]
+}
+
 export interface requestConfig {
   methods?: reqType
   url: string

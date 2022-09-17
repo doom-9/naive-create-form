@@ -41,6 +41,8 @@ import {
   NSelect,
   NSlider,
   NSpace,
+  NStep,
+  NSteps,
   NSwitch,
   NTimePicker,
   NTooltip,
@@ -50,7 +52,11 @@ import type { FormValidateCallback } from 'naive-ui/es/form/src/interface'
 import type { FileInfo } from 'naive-ui/es/upload/src/interface'
 import QuestionCircle48Regular from '../../icon/QuestionCircle48Regular.vue'
 import request from '../../utils/request'
-import type { ProFormItem, requestConfig } from './types/props'
+import type {
+  ProFormItem,
+  requestConfig,
+  stepsProFormItem,
+} from './types/props'
 
 const ProFormProps = {
   'modal': Boolean,
@@ -64,12 +70,17 @@ const ProFormProps = {
     type: Array as PropType<ProFormItem[]>,
     default: [],
   },
+  'stepsFormItems': {
+    type: Array as PropType<stepsProFormItem[]>,
+    default: [],
+  },
   'resetButton': Boolean,
   'validateButton': Boolean,
   'submitButton': {
     type: Boolean,
     default: true,
   },
+  'steps': Boolean,
   'title': String,
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
@@ -97,6 +108,10 @@ export default defineComponent({
   props: ProFormProps,
   setup(props, { slots, expose }) {
     const modalData = reactive<Record<string, any>>({})
+
+    const stepsCurrent = ref<number>(1)
+
+    const stepsStatus = ref<'process' | 'finish' | 'error' | 'wait'>('process')
 
     const handleInitialValues = () => {
       for (const key in props.initialValues) {
@@ -140,9 +155,18 @@ export default defineComponent({
     }
 
     const handleSubmitClick = () => {
-      const { onFinish, onError, transform } = props
+      const { onFinish, onError, transform, steps, stepsFormItems } = props
       formRef.value?.validate(async (errors) => {
         if (!errors) {
+          if (steps) {
+            stepsStatus.value = 'process'
+            const length = stepsFormItems.length
+            if (stepsCurrent.value < length)
+              stepsCurrent.value++
+
+            return
+          }
+
           const requestConfig = props.requestConfig
           let res: Record<string, any>
           const data = transform ? transform(modalData) : modalData
@@ -161,6 +185,9 @@ export default defineComponent({
           onFinish && onFinish(res)
         }
         else {
+          if (steps)
+            stepsStatus.value = 'error'
+
           onError && onError(errors)
         }
       })
@@ -432,8 +459,10 @@ export default defineComponent({
       }
     }
 
-    const Vnode: ComputedRef<JSX.Element[] | undefined> = computed(() => {
-      const { formItems, autoPlaceholder } = props
+    const getFormItemVnode = (
+      formItems: ProFormItem[],
+      autoPlaceholder: boolean,
+    ) => {
       return formItems?.map((item) => {
         if (item.type === 'divider') {
           return (
@@ -502,6 +531,39 @@ export default defineComponent({
           )
         }
       })
+    }
+
+    const Vnode: ComputedRef<JSX.Element[] | undefined> = computed(() => {
+      const { formItems, autoPlaceholder, steps, stepsFormItems } = props
+      if (steps) {
+        return getFormItemVnode(
+          stepsFormItems[stepsCurrent.value - 1].formItems,
+          autoPlaceholder,
+        )
+      }
+      else {
+        return getFormItemVnode(formItems, autoPlaceholder)
+      }
+    })
+
+    const stepsVnode: ComputedRef<JSX.Element[]> = computed(() => {
+      const { stepsFormItems } = props
+      return stepsFormItems.map(item => (
+        <NStep key={item.key} title={item.title}></NStep>
+      ))
+    })
+
+    const submitBtnText = computed(() => {
+      const { steps, stepsFormItems } = props
+      if (steps) {
+        const length = stepsFormItems.length
+        if (stepsCurrent.value < length)
+          return '下一步'
+        else return '提交'
+      }
+      else {
+        return '提交'
+      }
     })
 
     const BtnsVnode: ComputedRef<JSX.Element> = computed(() => {
@@ -525,7 +587,7 @@ export default defineComponent({
           {submitButton === true
             ? (
             <NButton onClick={handleSubmitClick} type="primary">
-              提交
+              {submitBtnText.value}
             </NButton>
               )
             : null}
@@ -545,6 +607,8 @@ export default defineComponent({
 
     return {
       modalData,
+      stepsCurrent,
+      stepsStatus,
       formRef,
       handleValidateClick,
       handleInputUpdateValue,
@@ -555,15 +619,20 @@ export default defineComponent({
       handleDrawerShowChange,
       Vnode,
       BtnsVnode,
+      stepsVnode,
     }
   },
   render() {
     const {
+      steps,
       formProps,
+      stepsCurrent,
+      stepsStatus,
       modalData,
       title,
       Vnode,
       BtnsVnode,
+      stepsVnode,
       modal,
       modalShow,
       modalProps,
@@ -574,8 +643,24 @@ export default defineComponent({
       handleDrawerShowChange,
     } = this
 
-    return modal
+    return steps
       ? (
+      <Fragment>
+        <NSpace vertical size={50} align="stretch">
+          <NSteps current={stepsCurrent} status={stepsStatus}>
+            {stepsVnode}
+          </NSteps>
+          <Fragment>
+            <NForm {...formProps} model={modalData} ref="formRef">
+              {Vnode}
+            </NForm>
+            {BtnsVnode}
+          </Fragment>
+        </NSpace>
+      </Fragment>
+        )
+      : modal
+        ? (
       <NModal
         show={modalShow}
         preset="card"
@@ -591,9 +676,9 @@ export default defineComponent({
         </NForm>
         {BtnsVnode}
       </NModal>
-        )
-      : drawer
-        ? (
+          )
+        : drawer
+          ? (
       <NDrawer
         show={drawerShow}
         {...drawerProps}
@@ -605,8 +690,8 @@ export default defineComponent({
         </NForm>
         {BtnsVnode}
       </NDrawer>
-          )
-        : (
+            )
+          : (
       <Fragment>
         {title ? <NDivider>{title}</NDivider> : null}
         <NForm {...formProps} model={modalData} ref="formRef">
@@ -614,6 +699,6 @@ export default defineComponent({
         </NForm>
         {BtnsVnode}
       </Fragment>
-          )
+            )
   },
 })
