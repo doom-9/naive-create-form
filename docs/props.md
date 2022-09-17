@@ -8,6 +8,8 @@
 | reset-button       |               boolean                |   false   | 是否显示重置按钮     |
 | validate-button    |               boolean                |   false   | 是否显示校验按钮     |
 | submit-button      |               boolean                |   true    | 是否显示提交按钮     |
+| steps              |               boolean                |   false   | 是否启用分步表单     |
+| stepsFormItems     |          stepsProFormItem[]          |    []     | 分步表单配置         |
 | title              |                string                | undefined | 表单标题             |
 | isKeyPressSubmit   |               boolean                |   false   | 按下回车提交表单     |
 | initialValues      |         Record<string, any>          | undefined | 表单初始数据         |
