@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash-es'
 import {
   PREFIX,
   UI_NAME,
@@ -461,13 +462,35 @@ export const generateCode = (data: formItemType[]): string => {
 export const generateConfig = (): string => {
   const array: ProFormItem[] = []
 
-  store.state.formItemArray.forEach((item) => {
-    if (item.value !== 'treeSelect' && item.value !== 'divider') {
-      const config: ProFormItem = {
-        type: item.value,
-        label: item.formItemConfig.label,
-        key: item.formItemConfig.key,
+  store.state.formItemArray.forEach((item: any) => {
+    const itemClone = cloneDeep(item)
+
+    if (itemClone.value === 'divider') {
+      let config: any = {
+        type: itemClone.value,
+        text: itemClone.formItemConfig.label,
       }
+      delete itemClone.formItemConfig.label
+
+      config = {
+        ...config,
+        ...itemClone.formItemConfig,
+      }
+
+      array.push(config)
+    }
+
+    if (itemClone.value !== 'treeSelect') {
+      const config: any = {
+        type: itemClone.value,
+        label: itemClone.formItemConfig.label,
+        key: itemClone.formItemConfig.key,
+      }
+
+      delete itemClone.formItemConfig.key
+      delete itemClone.formItemConfig.label
+
+      config.props = { ...itemClone.formItemConfig }
 
       array.push(config)
     }
