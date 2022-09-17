@@ -115,6 +115,10 @@ export type ProFormItem =
     valueEnum?: string[]
     splitString: string
   }>
+  | {
+    type: 'slot'
+    key: string
+  }
 
 export interface requestConfig {
   methods?: reqType

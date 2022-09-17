@@ -1,4 +1,4 @@
-## drawer
+## Drawer
 
 <script setup>
 import Drawer from './demo/drawer.vue'

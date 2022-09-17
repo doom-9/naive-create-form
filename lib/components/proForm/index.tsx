@@ -8,6 +8,7 @@ import {
   h,
   reactive,
   ref,
+  renderSlot,
   watch,
   watchEffect,
 } from 'vue'
@@ -94,7 +95,7 @@ const ProFormProps = {
 export default defineComponent({
   name: 'ProForm',
   props: ProFormProps,
-  setup(props) {
+  setup(props, { slots }) {
     const modalData = reactive<Record<string, any>>({})
 
     const handleInitialValues = () => {
@@ -196,7 +197,7 @@ export default defineComponent({
     })
 
     const getNTooltipVnode = (item: ProFormItem) => {
-      if (item.type === 'divider')
+      if (item.type === 'divider' || item.type === 'slot')
         return
       return item.tooltipConfig?.show
         ? (
@@ -439,6 +440,9 @@ export default defineComponent({
               {item.text}
             </NDivider>
           )
+        }
+        if (item.type === 'slot') {
+          return renderSlot(slots, item.key)
         }
         else {
           if (autoPlaceholder) {

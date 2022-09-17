@@ -1,4 +1,4 @@
-## modal
+## Modal
 
 <script setup>
 import Modal from './demo/modal.vue'

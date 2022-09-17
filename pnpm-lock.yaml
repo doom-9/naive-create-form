@@ -20,7 +20,7 @@ specifiers:
   uuid: ^8.3.2
   vite: ^3.1.0
   vite-plugin-dts: ^1.5.0
-  vitepress: ^1.0.0-draft.8
+  vitepress: ^1.0.0-alpha.15
   vitest: ^0.19.1
   vue: ^3.2.39
   vue-tsc: ^0.40.13

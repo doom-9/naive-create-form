@@ -1,4 +1,4 @@
-## initialValues
+## InitialValues
 
 <script setup>
 import InitialValues from './demo/initialValues.vue'
