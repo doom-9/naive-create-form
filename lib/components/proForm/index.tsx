@@ -41,6 +41,7 @@ import {
   NSelect,
   NSlider,
   NSpace,
+  NSpin,
   NStep,
   NSteps,
   NSwitch,
@@ -81,6 +82,7 @@ const ProFormProps = {
     default: true,
   },
   'steps': Boolean,
+  'spin': Boolean,
   'title': String,
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
@@ -112,6 +114,8 @@ export default defineComponent({
     const stepsCurrent = ref<number>(1)
 
     const stepsStatus = ref<'process' | 'finish' | 'error' | 'wait'>('process')
+
+    const spinStatus = ref<boolean>(false)
 
     const handleInitialValues = () => {
       for (const key in props.initialValues) {
@@ -155,6 +159,7 @@ export default defineComponent({
     }
 
     const handleSubmitClick = () => {
+      spinStatus.value = true
       const { onFinish, onError, transform, steps, stepsFormItems } = props
       formRef.value?.validate(async (errors) => {
         if (!errors) {
@@ -183,12 +188,14 @@ export default defineComponent({
           }
 
           onFinish && onFinish(res)
+          spinStatus.value = false
         }
         else {
           if (steps)
             stepsStatus.value = 'error'
 
           onError && onError(errors)
+          spinStatus.value = false
         }
       })
     }
@@ -609,6 +616,7 @@ export default defineComponent({
       modalData,
       stepsCurrent,
       stepsStatus,
+      spinStatus,
       formRef,
       handleValidateClick,
       handleInputUpdateValue,
@@ -625,9 +633,11 @@ export default defineComponent({
   render() {
     const {
       steps,
+      spin,
       formProps,
       stepsCurrent,
       stepsStatus,
+      spinStatus,
       modalData,
       title,
       Vnode,
@@ -643,21 +653,32 @@ export default defineComponent({
       handleDrawerShowChange,
     } = this
 
+    const commonVnode = spin
+      ? (
+      <NSpin show={spinStatus}>
+        <NForm {...formProps} model={modalData} ref="formRef">
+          {Vnode}
+        </NForm>
+        {BtnsVnode}
+      </NSpin>
+        )
+      : (
+      <Fragment>
+        <NForm {...formProps} model={modalData} ref="formRef">
+          {Vnode}
+        </NForm>
+        {BtnsVnode}
+      </Fragment>
+        )
+
     return steps
       ? (
-      <Fragment>
-        <NSpace vertical size={50} align="stretch">
-          <NSteps current={stepsCurrent} status={stepsStatus}>
-            {stepsVnode}
-          </NSteps>
-          <Fragment>
-            <NForm {...formProps} model={modalData} ref="formRef">
-              {Vnode}
-            </NForm>
-            {BtnsVnode}
-          </Fragment>
-        </NSpace>
-      </Fragment>
+      <NSpace vertical size={50} align="stretch">
+        <NSteps current={stepsCurrent} status={stepsStatus}>
+          {stepsVnode}
+        </NSteps>
+        {commonVnode}
+      </NSpace>
         )
       : modal
         ? (
@@ -671,10 +692,7 @@ export default defineComponent({
         onUpdateShow={handleModalShowChange}
       >
         {title ? <NDivider>{title}</NDivider> : null}
-        <NForm {...formProps} model={modalData} ref="formRef">
-          {Vnode}
-        </NForm>
-        {BtnsVnode}
+        {commonVnode}
       </NModal>
           )
         : drawer
@@ -685,19 +703,13 @@ export default defineComponent({
         onUpdateShow={handleDrawerShowChange}
       >
         {title ? <NDivider>{title}</NDivider> : null}
-        <NForm {...formProps} model={modalData} ref="formRef">
-          {Vnode}
-        </NForm>
-        {BtnsVnode}
+        {commonVnode}
       </NDrawer>
             )
           : (
       <Fragment>
         {title ? <NDivider>{title}</NDivider> : null}
-        <NForm {...formProps} model={modalData} ref="formRef">
-          {Vnode}
-        </NForm>
-        {BtnsVnode}
+        {commonVnode}
       </Fragment>
             )
   },
