@@ -95,7 +95,7 @@ const ProFormProps = {
 export default defineComponent({
   name: 'ProForm',
   props: ProFormProps,
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const modalData = reactive<Record<string, any>>({})
 
     const handleInitialValues = () => {
@@ -165,6 +165,12 @@ export default defineComponent({
         }
       })
     }
+
+    expose({
+      submit: handleSubmitClick,
+      reset: handleResetClick,
+      validate: handleValidateClick,
+    })
 
     const handleInputUpdateValue = (
       val: string | number | null | (string | number)[] | Required<FileInfo>[],
