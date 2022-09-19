@@ -118,7 +118,7 @@ export default defineComponent({
     const spinStatus = ref<boolean>(false)
 
     const dependenceConfig = ref<
-      Record<string, Set<(value: any) => void> | undefined>
+      Record<string, Set<(type: string, value: any) => void> | undefined>
         >({})
 
     const handleInitialValues = () => {
@@ -219,7 +219,7 @@ export default defineComponent({
       const changeTarget = dependenceConfig.value[key]
       if (changeTarget !== undefined) {
         changeTarget.forEach((item) => {
-          item(val)
+          item(key, val)
         })
       }
     }
