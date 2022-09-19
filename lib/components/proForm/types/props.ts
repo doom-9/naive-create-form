@@ -28,6 +28,8 @@ type addCommonProps<T extends Record<string, any>> = T & {
     text: string
   }
   rule?: FormItemRule
+  dependencies?: string | string[]
+  dependenciesChange?: (value: any) => void
 }
 
 export type ProFormItem =

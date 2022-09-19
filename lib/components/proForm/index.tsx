@@ -117,6 +117,10 @@ export default defineComponent({
 
     const spinStatus = ref<boolean>(false)
 
+    const dependenceConfig = ref<
+      Record<string, Set<(value: any) => void> | undefined>
+        >({})
+
     const handleInitialValues = () => {
       for (const key in props.initialValues) {
         if (Object.prototype.hasOwnProperty.call(props.initialValues, key))
@@ -212,6 +216,12 @@ export default defineComponent({
     ) => {
       modalData[key] = val
       props?.onValuesChange && props.onValuesChange(key, val)
+      const changeTarget = dependenceConfig.value[key]
+      if (changeTarget !== undefined) {
+        changeTarget.forEach((item) => {
+          item(val)
+        })
+      }
     }
 
     const handleRadioUpdateChecked = (
@@ -466,10 +476,8 @@ export default defineComponent({
       }
     }
 
-    const getFormItemVnode = (
-      formItems: ProFormItem[],
-      autoPlaceholder: boolean,
-    ) => {
+    const getFormItemVnode = (formItems: ProFormItem[]) => {
+      const { autoPlaceholder } = props
       return formItems?.map((item) => {
         if (item.type === 'divider') {
           return (
@@ -483,73 +491,101 @@ export default defineComponent({
             </NDivider>
           )
         }
-        if (item.type === 'slot') {
+        if (item.type === 'slot')
           return renderSlot(slots, item.key)
-        }
-        else {
-          if (autoPlaceholder) {
-            let text: string
-            if (
-              item.type === 'input'
-              || item.type === 'inputNumber'
-              || item.type === 'autoComplete'
-            ) {
-              text = `请输入${item.label}`
 
-              if (item.props) {
-                item.props.placeholder = text
-              }
-              else {
-                item.props = {
-                  placeholder: text,
-                }
-              }
+        if (autoPlaceholder) {
+          let text: string
+          if (
+            item.type === 'input'
+            || item.type === 'inputNumber'
+            || item.type === 'autoComplete'
+          ) {
+            text = `请输入${item.label}`
+
+            if (item.props) {
+              item.props.placeholder = text
             }
-
-            if (
-              item.type === 'select'
-              || item.type === 'timePicker'
-              || item.type === 'datePicker'
-            ) {
-              text = `请选择${item.label}`
-
-              if (item.props) {
-                item.props.placeholder = text
-              }
-              else {
-                item.props = {
-                  placeholder: text,
-                }
+            else {
+              item.props = {
+                placeholder: text,
               }
             }
           }
 
-          return (
-            <NFormItem
-              {...item.formItemProps}
-              key={item.key}
-              label={item.label}
-              path={item.key}
-              rule={item.rule}
-            >
-              {getNFormItemVnode(item)}
-              {getNTooltipVnode(item)}
-            </NFormItem>
-          )
+          if (
+            item.type === 'select'
+            || item.type === 'timePicker'
+            || item.type === 'datePicker'
+          ) {
+            text = `请选择${item.label}`
+
+            if (item.props) {
+              item.props.placeholder = text
+            }
+            else {
+              item.props = {
+                placeholder: text,
+              }
+            }
+          }
         }
+
+        if (
+          item.dependencies !== undefined
+          && item.dependenciesChange !== undefined
+        ) {
+          const dependenciesChange = item.dependenciesChange
+          if (typeof item.dependencies === 'string') {
+            const target = dependenceConfig.value[item.dependencies]
+            if (target !== undefined) {
+              target.add(dependenciesChange)
+            }
+            else {
+              dependenceConfig.value[item.dependencies] = new Set([
+                dependenciesChange,
+              ])
+            }
+          }
+          else {
+            item.dependencies.forEach((dependenceItem) => {
+              const target = dependenceConfig.value[dependenceItem]
+              if (target !== undefined) {
+                target.add(dependenciesChange)
+              }
+              else {
+                dependenceConfig.value[dependenceItem] = new Set([
+                  dependenciesChange,
+                ])
+              }
+            })
+          }
+        }
+
+        return (
+          <NFormItem
+            {...item.formItemProps}
+            key={item.key}
+            label={item.label}
+            path={item.key}
+            rule={item.rule}
+          >
+            {getNFormItemVnode(item)}
+            {getNTooltipVnode(item)}
+          </NFormItem>
+        )
       })
     }
 
     const Vnode: ComputedRef<JSX.Element[] | undefined> = computed(() => {
-      const { formItems, autoPlaceholder, steps, stepsFormItems } = props
+      const { formItems, steps, stepsFormItems } = props
       if (steps) {
         return getFormItemVnode(
           stepsFormItems[stepsCurrent.value - 1].formItems,
-          autoPlaceholder,
         )
       }
       else {
-        return getFormItemVnode(formItems, autoPlaceholder)
+        return getFormItemVnode(formItems)
       }
     })
 

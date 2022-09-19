@@ -46,7 +46,7 @@
     "vuex": "^4.0.2"
   },
   "peerDependencies": {
-    "naive-ui": "^2.32.0"
+    "naive-ui": "^2.33.2"
   },
   "lint-staged": {
     "*.ts": [
