@@ -129,10 +129,6 @@ const formItems = [
       type: 'number',
     },
   },
-  {
-    type: 'divider',
-    text: '配偶信息',
-  },
 ]
 
 const formProps = {
@@ -160,7 +156,7 @@ const value = ref({
 </script>
 
 <template>
-  {{ JSON.stringify(value) }}
+  <pre>{{ JSON.stringify(value, null, 2) }}</pre>
   <ProForm
     v-model="value"
     :form-items="formItems"

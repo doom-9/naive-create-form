@@ -121,10 +121,6 @@ const formItems = [
       type: 'number',
     },
   },
-  {
-    type: 'divider',
-    text: '配偶信息',
-  },
 ]
 
 const formProps = {

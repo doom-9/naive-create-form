@@ -170,7 +170,7 @@ const value = ref({
 </script>
 
 <template>
-  {{ JSON.stringify(value) }}
+  <pre>{{ JSON.stringify(value, null, 2) }}</pre>
   <NCard>
     <ProForm
       v-model="value"

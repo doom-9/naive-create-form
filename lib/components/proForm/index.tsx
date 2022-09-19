@@ -129,9 +129,6 @@ export default defineComponent({
           modalData[key] = props.initialValues[key]
       }
     }
-
-    handleInitialValues()
-
     watchEffect(() => {
       if (props.modelValue !== undefined) {
         for (const key in props.modelValue) {
@@ -145,6 +142,8 @@ export default defineComponent({
       props.onUpdateModelValue && props.onUpdateModelValue(modalData)
       props['onUpdate:modelValue'] && props['onUpdate:modelValue'](modalData)
     })
+
+    handleInitialValues()
 
     const formRef = ref<FormInst | null>(null)
 
