@@ -62,11 +62,13 @@ import type {
 const ProFormProps = {
   'modal': Boolean,
   'modalShow': Boolean,
-  'modalProps': Object as PropType<Omit<ModalProps, 'show' | 'onUpdateShow'>>,
+  'modalProps': Object as PropType<
+    Omit<ModalProps, 'show' | 'onUpdateShow' | 'preset'>
+  >,
   'drawer': Boolean,
   'drawerShow': Boolean,
   'drawerProps': Object as PropType<Omit<DrawerProps, 'show' | 'onUpdateShow'>>,
-  'formProps': Object as PropType<Omit<FormProps, 'model' | 'preset'>>,
+  'formProps': Object as PropType<Omit<FormProps, 'model'>>,
   'formItems': {
     type: Array as PropType<ProFormItem[]>,
     default: [],
