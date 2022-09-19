@@ -213,8 +213,9 @@ export default defineComponent({
     const handleInputUpdateValue = (
       val: string | number | null | (string | number)[] | Required<FileInfo>[],
       key: string,
+      normalize?: (value: any) => any,
     ) => {
-      modalData[key] = val
+      modalData[key] = normalize ? normalize(val) : val
       props?.onValuesChange && props.onValuesChange(key, val)
       const changeTarget = dependenceConfig.value[key]
       if (changeTarget !== undefined) {
@@ -275,7 +276,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -285,7 +286,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -298,7 +299,7 @@ export default defineComponent({
                 {...(item.props as RadioGroupProps)}
                 value={modalData[item.key]}
                 onUpdateValue={(value) => {
-                  handleInputUpdateValue(value, item.key)
+                  handleInputUpdateValue(value, item.key, item.normalize)
                 }}
               >
                 {item.valueEnum.map(valueItem => (
@@ -331,7 +332,7 @@ export default defineComponent({
               options={item.valueEnum}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -342,7 +343,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -353,7 +354,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -364,7 +365,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             />
           )
@@ -374,7 +375,7 @@ export default defineComponent({
             <NDatePicker
               {...item.props}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
               value={modalData[item.key]}
             />
@@ -385,7 +386,7 @@ export default defineComponent({
             <NColorPicker
               {...item.props}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
               value={modalData[item.key]}
             />
@@ -401,7 +402,7 @@ export default defineComponent({
                   'onUpdateValue' | 'value'
                 >)}
                 onUpdateValue={(value) => {
-                  handleInputUpdateValue(value, item.key)
+                  handleInputUpdateValue(value, item.key, item.normalize)
                 }}
                 value={modalData[item.key]}
               >
@@ -417,7 +418,7 @@ export default defineComponent({
                   key={valueItem.value}
                   {...valueItem}
                   onUpdateChecked={(value) => {
-                    handleInputUpdateValue(value, item.key)
+                    handleInputUpdateValue(value, item.key, item.normalize)
                   }}
                   value={modalData[item.key]}
                 />
@@ -434,7 +435,7 @@ export default defineComponent({
               {...item.props}
               fileList={modalData[item.key] ?? []}
               onUpdateFileList={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
             >
               <NButton>{item.buttonText}</NButton>
@@ -445,7 +446,7 @@ export default defineComponent({
           return (
             <NSlider
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
               value={modalData[item.key]}
             />
@@ -457,7 +458,7 @@ export default defineComponent({
               {...item.props}
               value={modalData[item.key]}
               onUpdateValue={(value) => {
-                handleInputUpdateValue(value, item.key)
+                handleInputUpdateValue(value, item.key, item.normalize)
               }}
               options={item.valueEnum?.map((suffix) => {
                 const prefix = modalData[item.key].value.split(
