@@ -85,6 +85,7 @@ const ProFormProps = {
   },
   'steps': Boolean,
   'spin': Boolean,
+  'scrollToFirstError': Boolean,
   'title': String,
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
@@ -165,7 +166,14 @@ export default defineComponent({
 
     const handleSubmitClick = () => {
       spinStatus.value = true
-      const { onFinish, onError, transform, steps, stepsFormItems } = props
+      const {
+        onFinish,
+        onError,
+        transform,
+        steps,
+        stepsFormItems,
+        scrollToFirstError,
+      } = props
       formRef.value?.validate(async (errors) => {
         if (!errors) {
           if (steps) {
@@ -198,6 +206,18 @@ export default defineComponent({
         else {
           if (steps)
             stepsStatus.value = 'error'
+
+          if (scrollToFirstError && errors.length > 0) {
+            const firstErrorElement = document.querySelector(
+              `#n-pro-form-${errors[0][0].field}`,
+            )
+            const top = firstErrorElement?.getClientRects()[0].top || 0
+
+            window.scrollBy({
+              top: top - 50,
+              behavior: 'smooth',
+            })
+          }
 
           onError && onError(errors)
           spinStatus.value = false
@@ -479,7 +499,7 @@ export default defineComponent({
     }
 
     const getFormItemVnode = (formItems: ProFormItem[]) => {
-      const { autoPlaceholder } = props
+      const { autoPlaceholder, scrollToFirstError } = props
       return formItems?.map((item) => {
         if (item.type === 'divider') {
           return (
@@ -572,6 +592,11 @@ export default defineComponent({
             path={item.key}
             rule={item.rule}
           >
+            {scrollToFirstError
+              ? (
+              <div id={`n-pro-form-${item.key}`}></div>
+                )
+              : null}
             {getNFormItemVnode(item)}
             {getNTooltipVnode(item)}
           </NFormItem>
