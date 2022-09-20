@@ -18,6 +18,7 @@ export default {
           { text: 'steps示例', link: '/steps' },
           { text: 'spin示例', link: '/spin' },
           { text: 'dependence示例', link: '/dependence' },
+          { text: 'scrollToFirstError示例', link: '/scrollToFirstError' },
           { text: 'initialValues示例', link: '/initialValues' },
           { text: 'tooltipConfig示例', link: '/tooltipConfig' },
           { text: 'autoPlaceholder示例', link: '/autoPlaceholder' },

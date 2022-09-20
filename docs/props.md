@@ -14,6 +14,7 @@
 | steps              |                        boolean                         |   false   | 是否启用分步表单                         |
 | spin               |                        boolean                         |   false   | 是否启用提交自动 loading                 |
 | stepsFormItems     |                   stepsProFormItem[]                   |    []     | 分步表单配置                             |
+| scrollToFirstError |                        boolean                         |   false   | 是否自动滚动到第一个出错的表单项         |
 | title              |                         string                         | undefined | 表单标题                                 |
 | transform          |          (value: Record<string, any>) => any           | undefined | 表单提交的前置函数，对表单数据进行处理   |
 | isKeyPressSubmit   |                        boolean                         |   false   | 按下回车提交表单                         |
