@@ -158,8 +158,11 @@ export default defineComponent({
 
     const handleResetClick = () => {
       for (const key in modalData) {
-        if (Object.prototype.hasOwnProperty.call(modalData, key))
-          modalData[key] = null
+        if (Object.prototype.hasOwnProperty.call(modalData, key)) {
+          if (props.initialValues)
+            modalData[key] = props.initialValues[key]
+          else modalData[key] = null
+        }
       }
       props?.onReset && props.onReset()
     }
