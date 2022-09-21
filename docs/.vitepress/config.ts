@@ -10,6 +10,7 @@ export default {
           { text: '基础示例', link: '/base' },
           { text: '参数', link: '/props' },
           { text: 'ProFormItem参数', link: '/ProFormItem' },
+          { text: 'expose参数', link: '/exposeConfig' },
           { text: 'modal示例', link: '/modal' },
           { text: 'drawer示例', link: '/drawer' },
           { text: 'button示例', link: '/button' },
