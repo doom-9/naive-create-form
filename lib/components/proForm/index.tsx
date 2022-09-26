@@ -228,10 +228,21 @@ export default defineComponent({
       })
     }
 
+    const handleScrollToField = (key: string) => {
+      const element = document.querySelector(key)
+      const top = element?.getClientRects()[0].top || 0
+
+      window.scrollBy({
+        top: top - 50,
+        behavior: 'smooth',
+      })
+    }
+
     expose({
       submit: handleSubmitClick,
       reset: handleResetClick,
       validate: handleValidateClick,
+      scrollToField: handleScrollToField,
     })
 
     const handleInputUpdateValue = (
