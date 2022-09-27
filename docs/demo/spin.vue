@@ -146,6 +146,14 @@ const onValuesChange = (key, value) => {
   message.success(`${key}--${value}`)
 }
 
+const handleFinish = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, 3000)
+  })
+}
+
 const value = ref({
   age: 22,
 })
@@ -164,6 +172,7 @@ const value = ref({
       :initial-values="initialValues"
       :on-values-change="onValuesChange"
       spin
+      :on-finish="handleFinish"
     />
   </NCard>
 </template>

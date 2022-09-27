@@ -8,7 +8,7 @@ export default {
         text: '介绍',
         items: [
           { text: '基础示例', link: '/base' },
-          { text: '参数', link: '/props' },
+          { text: 'props参数', link: '/props' },
           { text: 'ProFormItem参数', link: '/ProFormItem' },
           { text: 'expose参数', link: '/exposeConfig' },
           { text: 'modal示例', link: '/modal' },

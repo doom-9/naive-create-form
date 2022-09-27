@@ -203,7 +203,7 @@ export default defineComponent({
             )
           }
 
-          onFinish && onFinish(res)
+          onFinish && (await onFinish(res))
           spinStatus.value = false
         }
         else {
