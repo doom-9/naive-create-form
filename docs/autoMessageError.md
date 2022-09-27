@@ -1,16 +1,16 @@
-## AutoPlaceholder
+## AutoMessageError
 
 <script setup>
-import AutoPlaceholder from './demo/autoPlaceholder.vue'
+import AutoMessageError from './demo/autoMessageError.vue'
 import { NMessageProvider } from 'naive-ui'
 </script>
 
 <ClientOnly>
 <NMessageProvider>
-<AutoPlaceholder />
+<AutoMessageError />
 </NMessageProvider>
 </ClientOnly>
 
 ## 代码
 
-<<< @/demo/autoPlaceholder.vue
+<<< @/demo/autoMessageError.vue

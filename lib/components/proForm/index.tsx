@@ -6,6 +6,7 @@ import {
   defineComponent,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   h,
+  inject,
   reactive,
   ref,
   renderSlot,
@@ -48,6 +49,7 @@ import {
   NTimePicker,
   NTooltip,
   NUpload,
+  useMessage,
 } from 'naive-ui'
 import type { FormValidateCallback } from 'naive-ui/es/form/src/interface'
 import type { FileInfo } from 'naive-ui/es/upload/src/interface'
@@ -60,6 +62,8 @@ import type {
 } from './types/props'
 
 const ProFormProps = {
+  'autoPlaceholder': Boolean,
+  'autoMessageError': Boolean,
   'modal': Boolean,
   'modalShow': Boolean,
   'modalProps': Object as PropType<
@@ -90,7 +94,6 @@ const ProFormProps = {
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
   'modelValue': Object as PropType<Record<string, any>>,
-  'autoPlaceholder': Boolean,
   'requestConfig': Object as PropType<requestConfig>,
   'transform': Function as PropType<(value: Record<string, any>) => any>,
   'onReset': Function as PropType<() => void>,
@@ -148,11 +151,44 @@ export default defineComponent({
 
     const formRef = ref<FormInst | null>(null)
 
+    const handleScrollToField = (key: string) => {
+      const element = document.querySelector(key)
+      const top = element?.getClientRects()[0].top || 0
+
+      window.scrollBy({
+        top: top - 50,
+        behavior: 'smooth',
+      })
+    }
+
+    const message = useMessage()
+
+    const handleMessageError = (string: string | undefined) => {
+      const api = inject('n-message-api', null)
+      if (api === null) {
+        console.error(
+          'No outer <n-message-provider /> founded. See prerequisite in https://www.naiveui.com/en-US/os-theme/components/message for more details. If you want to use `useMessage` outside setup, please check https://www.naiveui.com/zh-CN/os-theme/components/message#Q-&-A.',
+        )
+      }
+      else {
+        message.error(string || '')
+      }
+    }
+
     const handleValidateClick = () => {
+      const { scrollToFirstError, autoMessageError, onValidate, onError }
+        = props
       formRef.value?.validate((errors) => {
-        if (!errors)
-          props?.onValidate && props.onValidate(modalData)
-        else props?.onError && props.onError(errors)
+        if (!errors) {
+          onValidate && onValidate(modalData)
+        }
+        else {
+          if (scrollToFirstError && errors.length > 0)
+            handleScrollToField(`#n-pro-form-${errors[0][0].field}`)
+          if (autoMessageError)
+            handleMessageError(errors[0][0].message)
+          onError && onError(errors)
+        }
       })
     }
 
@@ -176,6 +212,7 @@ export default defineComponent({
         steps,
         stepsFormItems,
         scrollToFirstError,
+        autoMessageError,
       } = props
       formRef.value?.validate(async (errors) => {
         if (!errors) {
@@ -210,31 +247,15 @@ export default defineComponent({
           if (steps)
             stepsStatus.value = 'error'
 
-          if (scrollToFirstError && errors.length > 0) {
-            const firstErrorElement = document.querySelector(
-              `#n-pro-form-${errors[0][0].field}`,
-            )
-            const top = firstErrorElement?.getClientRects()[0].top || 0
+          if (scrollToFirstError && errors.length > 0)
+            handleScrollToField(`#n-pro-form-${errors[0][0].field}`)
 
-            window.scrollBy({
-              top: top - 50,
-              behavior: 'smooth',
-            })
-          }
+          if (autoMessageError)
+            handleMessageError(errors[0][0].message)
 
           onError && onError(errors)
           spinStatus.value = false
         }
-      })
-    }
-
-    const handleScrollToField = (key: string) => {
-      const element = document.querySelector(key)
-      const top = element?.getClientRects()[0].top || 0
-
-      window.scrollBy({
-        top: top - 50,
-        behavior: 'smooth',
       })
     }
 

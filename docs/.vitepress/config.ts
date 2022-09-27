@@ -23,6 +23,7 @@ export default {
           { text: 'initialValues示例', link: '/initialValues' },
           { text: 'tooltipConfig示例', link: '/tooltipConfig' },
           { text: 'autoPlaceholder示例', link: '/autoPlaceholder' },
+          { text: 'autoMessageError示例', link: '/autoMessageError' },
         ],
       },
     ],
