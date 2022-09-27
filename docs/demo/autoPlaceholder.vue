@@ -1,5 +1,5 @@
 <script setup>
-import { useMessage } from 'naive-ui'
+import { NCard, useMessage } from 'naive-ui'
 import { ref } from 'vue'
 import ProForm from '../../lib/components/proForm/index'
 
@@ -153,15 +153,17 @@ const value = ref({
 
 <template>
   <pre>{{ JSON.stringify(value, null, 2) }}</pre>
-  <ProForm
-    v-model="value"
-    :form-items="formItems"
-    :form-props="formProps"
-    title="个人信息录入"
-    reset-button
-    is-key-press-submit
-    :initial-values="initialValues"
-    :on-values-change="onValuesChange"
-    auto-placeholder
-  />
+  <NCard>
+    <ProForm
+      v-model="value"
+      :form-items="formItems"
+      :form-props="formProps"
+      title="个人信息录入"
+      reset-button
+      is-key-press-submit
+      :initial-values="initialValues"
+      :on-values-change="onValuesChange"
+      auto-placeholder
+    />
+  </NCard>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { NButton } from 'naive-ui'
+import { NButton, NCard } from 'naive-ui'
 import { ref } from 'vue'
 import proForm from '../../lib/components/proForm/index'
 
@@ -135,12 +135,14 @@ const formProps = {
   <NButton @click="formRef.validate()">
     触发表单校验
   </NButton>
-  <proForm
-    ref="formRef"
-    :form-items="formItems"
-    :form-props="formProps"
-    title="个人信息录入"
-    reset-button
-    validate-button
-  />
+  <NCard>
+    <proForm
+      ref="formRef"
+      :form-items="formItems"
+      :form-props="formProps"
+      title="个人信息录入"
+      reset-button
+      validate-button
+    />
+  </NCard>
 </template>
