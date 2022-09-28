@@ -185,7 +185,7 @@ export default defineComponent({
         else {
           if (scrollToFirstError && errors.length > 0)
             handleScrollToField(`#n-pro-form-${errors[0][0].field}`)
-          if (autoMessageError)
+          if (autoMessageError && errors.length > 0)
             handleMessageError(errors[0][0].message)
           onError && onError(errors)
         }
@@ -250,7 +250,7 @@ export default defineComponent({
           if (scrollToFirstError && errors.length > 0)
             handleScrollToField(`#n-pro-form-${errors[0][0].field}`)
 
-          if (autoMessageError)
+          if (autoMessageError && errors.length > 0)
             handleMessageError(errors[0][0].message)
 
           onError && onError(errors)
