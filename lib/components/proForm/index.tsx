@@ -292,6 +292,16 @@ export default defineComponent({
       props?.onValuesChange && props.onValuesChange(key, val)
     }
 
+    const handleModalShowChange = (value: boolean) => {
+      props.onUpdateModalShow && props.onUpdateModalShow(value)
+      props['onUpdate:modalShow'] && props['onUpdate:modalShow'](value)
+    }
+
+    const handleDrawerShowChange = (value: boolean) => {
+      props.onUpdateDrawerShow && props.onUpdateDrawerShow(value)
+      props['onUpdate:drawerShow'] && props['onUpdate:drawerShow'](value)
+    }
+
     const keyDownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Enter')
         handleSubmitClick()
@@ -699,16 +709,6 @@ export default defineComponent({
         </NSpace>
       )
     })
-
-    const handleModalShowChange = (value: boolean) => {
-      props.onUpdateModalShow && props.onUpdateModalShow(value)
-      props['onUpdate:modalShow'] && props['onUpdate:modalShow'](value)
-    }
-
-    const handleDrawerShowChange = (value: boolean) => {
-      props.onUpdateDrawerShow && props.onUpdateDrawerShow(value)
-      props['onUpdate:drawerShow'] && props['onUpdate:drawerShow'](value)
-    }
 
     return {
       modalData,
