@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { NButton } from 'naive-ui'
-import proForm from '../../lib/components/proForm/index'
+import { ProForm } from 'naive-create-form'
 
 const formItems = [
   {
@@ -135,7 +135,7 @@ const showDrawer = ref(false)
   <NButton @click="showDrawer = !showDrawer">
     {{ showDrawer ? "关闭" : "打开" }}
   </NButton>
-  <proForm
+  <ProForm
     v-model:drawerShow="showDrawer"
     :form-items="formItems"
     :form-props="formProps"

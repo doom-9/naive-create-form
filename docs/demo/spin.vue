@@ -1,7 +1,7 @@
 <script setup>
 import { NCard, useMessage } from 'naive-ui'
 import { ref } from 'vue'
-import ProForm from '../../lib/components/proForm/index'
+import { ProForm } from 'naive-create-form'
 
 const message = useMessage()
 

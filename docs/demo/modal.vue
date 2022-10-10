@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { NButton } from 'naive-ui'
-import proForm from '../../lib/components/proForm/index'
+import { ProForm } from 'naive-create-form'
 
 const formItems = [
   {
@@ -135,7 +135,7 @@ const showModal = ref(false)
   <NButton @click="showModal = !showModal">
     {{ showModal ? "关闭" : "打开" }}
   </NButton>
-  <proForm
+  <ProForm
     v-model:modalShow="showModal"
     :form-items="formItems"
     :form-props="formProps"

@@ -1,7 +1,7 @@
 <script setup>
 import { NButton, NCard } from 'naive-ui'
 import { ref } from 'vue'
-import proForm from '../../lib/components/proForm/index'
+import { ProForm } from 'naive-create-form'
 
 const formRef = ref()
 
@@ -136,7 +136,7 @@ const formProps = {
     触发表单校验
   </NButton>
   <NCard>
-    <proForm
+    <ProForm
       ref="formRef"
       :form-items="formItems"
       :form-props="formProps"

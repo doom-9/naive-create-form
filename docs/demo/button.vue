@@ -1,5 +1,5 @@
 <script setup>
-import proForm from '../../lib/components/proForm/index'
+import { ProForm } from 'naive-create-form'
 
 const formItems = [
   {
@@ -128,7 +128,7 @@ const formProps = {
 </script>
 
 <template>
-  <proForm
+  <ProForm
     :form-items="formItems"
     :form-props="formProps"
     title="个人信息录入"
