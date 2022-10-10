@@ -1,6 +1,6 @@
 ## 对 NaiveUI 的 Form 组件和各种数据录入组件进行封装
 
-### 可以通过可视化工具**naive-create-form**生成配置代码，然后结合本组件进行使用
+### 可以通过可视化工具 [naive-create-form](https://naive-create-form-five.vercel.app/) 生成配置代码，然后结合本组件进行使用
 
 ### 安装：
 
