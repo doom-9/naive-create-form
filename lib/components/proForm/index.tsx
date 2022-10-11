@@ -6,7 +6,6 @@ import {
   defineComponent,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   h,
-  inject,
   reactive,
   ref,
   renderSlot,
@@ -53,6 +52,7 @@ import {
 } from 'naive-ui'
 import type { FormValidateCallback } from 'naive-ui/es/form/src/interface'
 import type { FileInfo } from 'naive-ui/es/upload/src/interface'
+import type { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider'
 import QuestionCircle48Regular from '../../icon/QuestionCircle48Regular.vue'
 import request from '../../utils/request'
 import type {
@@ -161,17 +161,13 @@ export default defineComponent({
       })
     }
 
+    let message: MessageApiInjection | null
+
+    if (props.autoMessageError)
+      message = useMessage()
+
     const handleMessageError = (string: string | undefined) => {
-      const api = inject('n-message-api', null)
-      if (api === null) {
-        console.error(
-          'No outer <n-message-provider /> founded. See prerequisite in https://www.naiveui.com/en-US/os-theme/components/message for more details. If you want to use `useMessage` outside setup, please check https://www.naiveui.com/zh-CN/os-theme/components/message#Q-&-A.',
-        )
-      }
-      else {
-        const message = useMessage()
-        message.error(string || '')
-      }
+      message && message.error(string || '')
     }
 
     const handleValidateClick = () => {

@@ -15,7 +15,7 @@ specifiers:
   jsdom: ^20.0.0
   lint-staged: ^13.0.3
   lodash-es: ^4.17.21
-  naive-create-form: ^1.3.1
+  naive-create-form: ^1.3.2
   naive-ui: ^2.33.3
   np: ^7.6.2
   prettier: ^2.7.1
@@ -45,7 +45,7 @@ devDependencies:
   jsdom: 20.0.0
   lint-staged: 13.0.3
   lodash-es: 4.17.21
-  naive-create-form: 1.3.1_naive-ui@2.33.3
+  naive-create-form: 1.3.2_naive-ui@2.33.3
   naive-ui: 2.33.3_vue@3.2.39
   np: 7.6.2
   prettier: 2.7.1
@@ -4769,8 +4769,8 @@ packages:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
 
-  /naive-create-form/1.3.1_naive-ui@2.33.3:
-    resolution: {integrity: sha512-LOQLN6B9khqm3vsUQltbWq8u/qv+Z2ekeayTUkgOTUDIzmSYf+yCTdfEQ/C949tG4G7Cg1UmUTBHFy9SthN0mQ==}
+  /naive-create-form/1.3.2_naive-ui@2.33.3:
+    resolution: {integrity: sha512-c4rekBIT5SPDVmd3m93oor/YL8iiIUGx9GWoPf5mGSxDzQMsdR5WtFOCVzEXyuo1tC5hRxDN7k2aq251z9UcgA==}
     engines: {node: '>=14'}
     peerDependencies:
       naive-ui: ^2.33.2
