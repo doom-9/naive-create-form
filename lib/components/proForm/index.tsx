@@ -161,8 +161,6 @@ export default defineComponent({
       })
     }
 
-    const message = useMessage()
-
     const handleMessageError = (string: string | undefined) => {
       const api = inject('n-message-api', null)
       if (api === null) {
@@ -171,6 +169,7 @@ export default defineComponent({
         )
       }
       else {
+        const message = useMessage()
         message.error(string || '')
       }
     }

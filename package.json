@@ -8,7 +8,7 @@
     "serve": "vite preview",
     "lint": "eslint .",
     "check": "npx taze -w",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --port 3003",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "prepare": "husky install",
