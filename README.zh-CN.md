@@ -5,13 +5,15 @@
 `naive-ui-form-creator`是一个基于 `naive-ui` 组件库的**可视化表单生成器**，如果你有经常**制作`naive-ui`表单**的需求，可以使用此工具。`naive-ui-form-creator`是**可视化的**，**支持拖拽排序的**，它能够及时呈现和反馈表单的内容。
 
 在线预览：[地址](https://naive-create-form-five.vercel.app/)
-文档: [地址](https://naive-create-form-doc.vercel.app/)
+在线文档: [地址](https://naive-create-form-doc.vercel.app/)
 
 ## 如何使用
 
 你可以 Fock 项目，自己部署访问，或者直接访问上面已经部署好的地址。
 
 当你制作完成表单后，点击右上角的**生成组件代码**，你就能得到一份 Vue3 的模版代码，然后拷贝到你的项目中使用。
+
+或者点击右上角的**生成配置对象**，得到一份表单配置对象，然后根据[在线文档](https://naive-create-form-doc.vercel.app/)进行使用。
 
 ## 提示
 

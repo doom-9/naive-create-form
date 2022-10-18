@@ -93,7 +93,7 @@ const handleGenerateConfig = () => {
             size="medium"
             @click="handleGenerateConfig"
           >
-            {{ $t("generateConfig") }}
+            {{ $t("generateConfigurationObject") }}
             <n-icon size="20">
               <FolderOutlined />
             </n-icon>
