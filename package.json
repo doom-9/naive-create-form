@@ -3,7 +3,8 @@
   "version": "1.3.3",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build-check": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "lib-build": "vite build -c vite.config.lib.ts",
     "serve": "vite preview",
     "lint": "eslint .",
