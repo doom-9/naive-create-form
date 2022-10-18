@@ -1,7 +1,7 @@
 | 名称               |                          类型                          |  默认值   | 说明                                     |
 | ------------------ | :----------------------------------------------------: | :-------: | :--------------------------------------- |
 | autoPlaceholder    |                        boolean                         |   false   | 自动生成 placeholder                     |
-| autoMessageError   |                        boolean                         |   false   | 自动提示错误表单                     |
+| autoMessageError   |                        boolean                         |   false   | 自动提示错误表单                         |
 | modal              |                        boolean                         |   false   | 是否启用 modal                           |
 | modal-show         |                        boolean                         |   false   | 是否显示 modal                           |
 | modal-props        | Omit<ModalProps, 'show' \| 'onUpdateShow' \| 'preset'> | undefined | modal 组件接受的参数                     |
@@ -21,6 +21,8 @@
 | transform          |          (value: Record<string, any>) => any           | undefined | 表单提交的前置函数，对表单数据进行处理   |
 | isKeyPressSubmit   |                        boolean                         |   false   | 按下回车提交表单                         |
 | initialValues      |                  Record<string, any>                   | undefined | 表单初始数据                             |
+| grid               |                        boolean                         | undefined | 是否开启栅格布局                         |
+| gridConfig         |                       GridProps                        | undefined | 栅格布局配置                             |
 | modelValue         |                  Record<string, any>                   | undefined | 表单绑定数据                             |
 | onReset            |                       () => void                       | undefined | 点击`重置`按钮的回调                     |
 | onFinish           |                       () => void                       | undefined | 表单提交完成的回调                       |

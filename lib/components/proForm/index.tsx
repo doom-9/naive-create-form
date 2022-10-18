@@ -17,6 +17,7 @@ import type {
   DrawerProps,
   FormInst,
   FormProps,
+  GridProps,
   ModalProps,
   RadioGroupProps,
 } from 'naive-ui'
@@ -31,6 +32,8 @@ import {
   NDrawer,
   NForm,
   NFormItem,
+  NGi,
+  NGrid,
   NIcon,
   NInput,
   NInputNumber,
@@ -93,6 +96,8 @@ const ProFormProps = {
   'title': String,
   'isKeyPressSubmit': Boolean,
   'initialValues': Object as PropType<Record<string, any>>,
+  'grid': Boolean,
+  'gridConfig': Object as PropType<GridProps>,
   'modelValue': Object as PropType<Record<string, any>>,
   'requestConfig': Object as PropType<requestConfig>,
   'transform': Function as PropType<(value: Record<string, any>) => any>,
@@ -539,7 +544,7 @@ export default defineComponent({
     }
 
     const getFormItemVnode = (formItems: ProFormItem[]) => {
-      const { autoPlaceholder, scrollToFirstError } = props
+      const { autoPlaceholder, scrollToFirstError, grid } = props
       return formItems?.map((item) => {
         if (item.type === 'divider') {
           return (
@@ -624,37 +629,74 @@ export default defineComponent({
           }
         }
 
-        return (
-          <NFormItem
-            {...item.formItemProps}
-            key={item.key}
-            label={item.label}
-            path={item.key}
-            rule={item.rule}
-          >
-            {scrollToFirstError
-              ? (
-              <div id={`n-pro-form-${item.key}`}></div>
-                )
-              : null}
-            {getNFormItemVnode(item)}
-            {getNTooltipVnode(item)}
-          </NFormItem>
-        )
+        if (grid) {
+          return (
+            <NGi key={item.key}>
+              <NFormItem
+                {...item.formItemProps}
+                label={item.label}
+                path={item.key}
+                rule={item.rule}
+              >
+                {scrollToFirstError
+                  ? (
+                  <div id={`n-pro-form-${item.key}`}></div>
+                    )
+                  : null}
+                {getNFormItemVnode(item)}
+                {getNTooltipVnode(item)}
+              </NFormItem>
+            </NGi>
+          )
+        }
+        else {
+          return (
+            <NFormItem
+              {...item.formItemProps}
+              key={item.key}
+              label={item.label}
+              path={item.key}
+              rule={item.rule}
+            >
+              {scrollToFirstError
+                ? (
+                <div id={`n-pro-form-${item.key}`}></div>
+                  )
+                : null}
+              {getNFormItemVnode(item)}
+              {getNTooltipVnode(item)}
+            </NFormItem>
+          )
+        }
       })
     }
 
-    const Vnode: ComputedRef<JSX.Element[] | undefined> = computed(() => {
-      const { formItems, steps, stepsFormItems } = props
-      if (steps) {
-        return getFormItemVnode(
-          stepsFormItems[stepsCurrent.value - 1].formItems,
-        )
-      }
-      else {
-        return getFormItemVnode(formItems)
-      }
-    })
+    const Vnode: ComputedRef<JSX.Element[] | JSX.Element | undefined>
+      = computed(() => {
+        const { formItems, steps, stepsFormItems, grid, gridConfig } = props
+        if (steps) {
+          return grid
+            ? (
+            <NGrid {...gridConfig}>
+              {getFormItemVnode(
+                stepsFormItems[stepsCurrent.value - 1].formItems,
+              )}
+            </NGrid>
+              )
+            : (
+                getFormItemVnode(stepsFormItems[stepsCurrent.value - 1].formItems)
+              )
+        }
+        else {
+          return grid
+            ? (
+            <NGrid {...gridConfig}>{getFormItemVnode(formItems)}</NGrid>
+              )
+            : (
+                getFormItemVnode(formItems)
+              )
+        }
+      })
 
     const stepsVnode: ComputedRef<JSX.Element[]> = computed(() => {
       const { stepsFormItems } = props
