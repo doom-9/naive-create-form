@@ -65,12 +65,15 @@ const handleGenerateConfig = () => {
             secondary
             round
             size="medium"
+            icon-placement="right"
             @click="handleGenerateCodeSet"
           >
             {{ $t("generateCodeSettings") }}
-            <n-icon size="20">
-              <SettingOutlined />
-            </n-icon>
+            <template #icon>
+              <n-icon size="20">
+                <SettingOutlined />
+              </n-icon>
+            </template>
           </n-button>
           <n-button
             type="primary"
@@ -78,12 +81,15 @@ const handleGenerateConfig = () => {
             secondary
             round
             size="medium"
+            icon-placement="right"
             @click="handleGenerateCode"
           >
             {{ $t("generateComponentCode") }}
-            <n-icon size="20">
-              <FolderOutlined />
-            </n-icon>
+            <template #icon>
+              <n-icon size="20">
+                <FolderOutlined />
+              </n-icon>
+            </template>
           </n-button>
           <n-button
             type="primary"
@@ -91,12 +97,15 @@ const handleGenerateConfig = () => {
             secondary
             round
             size="medium"
+            icon-placement="right"
             @click="handleGenerateConfig"
           >
             {{ $t("generateConfigurationObject") }}
-            <n-icon size="20">
-              <FolderOutlined />
-            </n-icon>
+            <template #icon>
+              <n-icon size="20">
+                <FolderOutlined />
+              </n-icon>
+            </template>
           </n-button>
           <n-button strong quaternary round @click="$emit('changeTheme')">
             {{ $props.isDark ? $t("light") : $t("dark") }}
@@ -109,7 +118,7 @@ const handleGenerateConfig = () => {
           </n-button>
         </n-space>
       </n-layout-header>
-      <n-layout has-sider position="absolute" style="top: 64px; bottom: 64px">
+      <n-layout has-sider position="absolute" style="top: 64px; bottom: 0px">
         <n-layout-sider bordered content-style="padding: 24px;" width="200">
           <LeftSider />
         </n-layout-sider>
@@ -124,13 +133,13 @@ const handleGenerateConfig = () => {
           <RightSider />
         </n-layout-sider>
       </n-layout>
-      <n-layout-footer
+      <!-- <n-layout-footer
         bordered
         position="absolute"
         style="height: 64px; padding: 24px"
       >
         {{ $t("tip") }}
-      </n-layout-footer>
+      </n-layout-footer> -->
     </n-layout>
     <n-modal
       v-model:show="showModal"

@@ -77,27 +77,29 @@ const handleTabsChange = (val: 'form' | 'formItem') => {
 </script>
 
 <template>
-  <n-divider title-placement="left">
-    {{ $t("setUp") }}
-  </n-divider>
-  <n-tabs type="segment" :value="tabsValue" @update:value="handleTabsChange">
-    <n-tab-pane name="formItem" :tab="$t('formItemConfiguration')">
-      <n-empty
-        v-if="formItemArrayLength === 0 || selectedFormItemType === ''"
-        :description="$t('addFormItem')"
-      >
-        <template #extra>
-          <n-button @click="handleAddClick">
-            {{ $t("addFormItemAndSelect") }}
-          </n-button>
-        </template>
-      </n-empty>
-      <component :is="showComponent" v-else :key="selectedFormItem" />
-    </n-tab-pane>
-    <n-tab-pane name="form" :tab="$t('formConfiguration')">
-      <FormConfig />
-    </n-tab-pane>
-  </n-tabs>
+  <n-scrollbar>
+    <n-divider title-placement="left">
+      {{ $t("setUp") }}
+    </n-divider>
+    <n-tabs type="segment" :value="tabsValue" @update:value="handleTabsChange">
+      <n-tab-pane name="formItem" :tab="$t('formItemConfiguration')">
+        <n-empty
+          v-if="formItemArrayLength === 0 || selectedFormItemType === ''"
+          :description="$t('addFormItem')"
+        >
+          <template #extra>
+            <n-button @click="handleAddClick">
+              {{ $t("addFormItemAndSelect") }}
+            </n-button>
+          </template>
+        </n-empty>
+        <component :is="showComponent" v-else :key="selectedFormItem" />
+      </n-tab-pane>
+      <n-tab-pane name="form" :tab="$t('formConfiguration')">
+        <FormConfig />
+      </n-tab-pane>
+    </n-tabs>
+  </n-scrollbar>
 </template>
 
 <style></style>
