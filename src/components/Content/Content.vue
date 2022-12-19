@@ -67,8 +67,11 @@ const selectedFormItem = computed(() => {
         >
           <n-card
             :content-style="`cursor: pointer; ${
-              selectedFormItem === item.id ? 'border: 1px solid #18a058;' : ''
-            }`"
+              selectedFormItem === item.id
+                ? 'border: 3px solid #18a058;'
+                : 'border: 3px solid #eee;'
+            };border-radius: 20px;transition: all 0.1s`"
+            :bordered="false"
             @click="setSelectedFormItem(item.id)"
           >
             <div class="buttons">
