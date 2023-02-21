@@ -1,0 +1,41 @@
+{
+  "hash": "22d8e2d3",
+  "browserHash": "4c0bbee2",
+  "optimized": {
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.2.47/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "5deace4a",
+      "needsInterop": false
+    },
+    "@theme/index": {
+      "src": "../../../../node_modules/.pnpm/vitepress@1.0.0-alpha.47_ualytggqouazutyh25b2kkzeye/node_modules/vitepress/dist/client/theme-default/index.js",
+      "file": "@theme_index.js",
+      "fileHash": "008e2052",
+      "needsInterop": false
+    },
+    "naive-ui": {
+      "src": "../../../../node_modules/.pnpm/naive-ui@2.34.3_vue@3.2.47/node_modules/naive-ui/es/index.js",
+      "file": "naive-ui.js",
+      "fileHash": "c4732a92",
+      "needsInterop": false
+    },
+    "naive-create-form": {
+      "src": "../../../../node_modules/.pnpm/naive-create-form@1.3.3_naive-ui@2.34.3/node_modules/naive-create-form/dist/index.mjs",
+      "file": "naive-create-form.js",
+      "fileHash": "3da0c72a",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-KTTLNWAL": {
+      "file": "chunk-KTTLNWAL.js"
+    },
+    "chunk-LZPJ5JBW": {
+      "file": "chunk-LZPJ5JBW.js"
+    },
+    "chunk-4EOJPDL2": {
+      "file": "chunk-4EOJPDL2.js"
+    }
+  }
+}

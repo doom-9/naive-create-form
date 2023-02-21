@@ -121,16 +121,16 @@ const selectedFormItem = computed(() => {
               >
                 <n-space>
                   <n-radio
-                    v-for="item2 in item.formItemConfig.options ?? [
+                    v-for="option in item.formItemConfig.options ?? [
                       {
                         value: 'demo',
                         label: 'demo',
                       },
                     ]"
-                    :key="item2.value"
-                    :value="item2.value"
+                    :key="option.value"
+                    :value="option.value"
                   >
-                    {{ item2.label }}
+                    {{ option.label }}
                   </n-radio>
                 </n-space>
               </n-radio-group>
